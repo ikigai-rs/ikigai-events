@@ -1,0 +1,15 @@
+[package]
+name = "ikigai-events"
+description = "The identifiers ikigai's event-facing modules share: entries, feeds, cursors, feed epochs, transitions, idempotency and fencing keys, and the CloudEvents attribute mapping."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+readme = "../../README.md"
+keywords = ["ikigai", "roc", "events", "cloudevents", "rdf"]
+categories = ["wasm"]
+# A scaffold: nothing is published until the identifiers are designed and tested.
+publish = false
+
+[dependencies]
