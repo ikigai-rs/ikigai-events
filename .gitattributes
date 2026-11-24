@@ -1,0 +1,8 @@
+# Line endings: LF in the repository AND in every checkout, whatever core.autocrlf says.
+#
+# The shared identifier vectors are compared byte for byte across faces, so a CRLF checkout of
+# them is drift. `eol=lf` on a path overrides core.autocrlf for it.
+* text=auto eol=lf
+
+# Named explicitly, so content detection can never decide them.
+crates/ikigai-events/tests/vectors/*.json text eol=lf

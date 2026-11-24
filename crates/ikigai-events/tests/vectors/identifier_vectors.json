@@ -1,0 +1,1042 @@
+{
+  "about": "Identifier vectors (ledger #4126) computed from tests/vectors/identifier_cases.json by crates/ikigai-events/tests/vectors.rs, which fails if this file differs from what it computes. Every 64-bit number is a STRING of decimal digits. Where the crate refuses, the value is null and `refusal` holds its one sentence; a face must refuse exactly there, and matching the sentence byte for byte is recommended. `tokens`: per token kind, whether each input is accepted. `names`: each IRI read as an entry, a feed and a listener. `cursors`: a cursor's text read and written back. `event_keys`: event_key(source, id), BLAKE3 over the domain, source and id, each framed by its byte length as a little-endian u64, written `event:b3:{hex}`. `fence_keys` and `fence_texts`: a fencing key built and read. `lower` and `lift`: the CloudEvents attribute mapping, each way. `mapping` and `constants`: the mapping as data.",
+  "constants": {
+    "event_key_domain": "ikigai-events:event-key:v1",
+    "event_key_prefix": "event:",
+    "ext_epoch": "ikepoch",
+    "ext_seq": "ikseq",
+    "ext_traceparent": "traceparent",
+    "fence_key_prefix": "fence:",
+    "specversion": "1.0"
+  },
+  "cursors": [
+    {
+      "cursor": {
+        "after": "0",
+        "epoch": null,
+        "text": "0"
+      },
+      "refusal": null,
+      "text": "0"
+    },
+    {
+      "cursor": {
+        "after": "12",
+        "epoch": null,
+        "text": "12"
+      },
+      "refusal": null,
+      "text": "12"
+    },
+    {
+      "cursor": {
+        "after": "18446744073709551615",
+        "epoch": null,
+        "text": "18446744073709551615"
+      },
+      "refusal": null,
+      "text": "18446744073709551615"
+    },
+    {
+      "cursor": {
+        "after": "12",
+        "epoch": "5f0c9e3a1b2d4c6e8f0a1b2c3d4e5f60",
+        "text": "5f0c9e3a1b2d4c6e8f0a1b2c3d4e5f60:12"
+      },
+      "refusal": null,
+      "text": "5f0c9e3a1b2d4c6e8f0a1b2c3d4e5f60:12"
+    },
+    {
+      "cursor": {
+        "after": "0",
+        "epoch": "e-1",
+        "text": "e-1:0"
+      },
+      "refusal": null,
+      "text": "e-1:0"
+    },
+    {
+      "cursor": null,
+      "refusal": "An empty value is not a cursor position: use decimal digits with no sign and no leading zero, at most 18446744073709551615.",
+      "text": ""
+    },
+    {
+      "cursor": null,
+      "refusal": "An empty value is not a feed epoch: use 1 to 64 lowercase letters, digits and hyphens.",
+      "text": ":5"
+    },
+    {
+      "cursor": null,
+      "refusal": "An empty value is not a cursor position: use decimal digits with no sign and no leading zero, at most 18446744073709551615.",
+      "text": "e1:"
+    },
+    {
+      "cursor": null,
+      "refusal": "`E1` is not a feed epoch: use 1 to 64 lowercase letters, digits and hyphens.",
+      "text": "E1:5"
+    },
+    {
+      "cursor": null,
+      "refusal": "`01` is not a cursor position: use decimal digits with no sign and no leading zero, at most 18446744073709551615.",
+      "text": "e1:01"
+    },
+    {
+      "cursor": null,
+      "refusal": "`5:6` is not a cursor position: use decimal digits with no sign and no leading zero, at most 18446744073709551615.",
+      "text": "e1:5:6"
+    },
+    {
+      "cursor": null,
+      "refusal": "`-1` is not a cursor position: use decimal digits with no sign and no leading zero, at most 18446744073709551615.",
+      "text": "-1"
+    },
+    {
+      "cursor": null,
+      "refusal": "`+1` is not a cursor position: use decimal digits with no sign and no leading zero, at most 18446744073709551615.",
+      "text": "+1"
+    },
+    {
+      "cursor": null,
+      "refusal": "`18446744073709551616` is not a cursor position: use decimal digits with no sign and no leading zero, at most 18446744073709551615.",
+      "text": "18446744073709551616"
+    }
+  ],
+  "event_keys": [
+    {
+      "id": "urn:layer:talk:entry:01m84z0jyt0000000000001",
+      "key": "event:b3:9872cb9d606e03584ad6985d7cb5962ab3fca4b7103c69ac4a6245cc532e9c47",
+      "refusal": null,
+      "source": "urn:layer:talk"
+    },
+    {
+      "id": "urn:iki:ledger:default:transition:seq:9",
+      "key": "event:b3:4974cef5c586eeb065a1699f1010782ded3ad0a1f51303d3b98b6d2cedb499cc",
+      "refusal": null,
+      "source": "urn:iki:ledger:default:transition"
+    },
+    {
+      "id": "A234-1234-1234",
+      "key": "event:b3:0d4106be73b453e98dde550641618b3c8d814adcc15716d0c4c9c6d4b422bb44",
+      "refusal": null,
+      "source": "https://example.com/sensors/tn-1234567"
+    },
+    {
+      "id": "c",
+      "key": "event:b3:8e003cadd42574783619d873b073f888c656abfb273351430200faebed724b36",
+      "refusal": null,
+      "source": "ab"
+    },
+    {
+      "id": "bc",
+      "key": "event:b3:9da9aec6b8c4ee73e8987b51e82a38694604c7481e07836a825379baadf1b00c",
+      "refusal": null,
+      "source": "a"
+    },
+    {
+      "id": "événement 🎉",
+      "key": "event:b3:0a85d7df8368bc1dfe26902fb45078f4a29df3ad94bd077d5fdd751670e6d381",
+      "refusal": null,
+      "source": "/relative/source"
+    },
+    {
+      "id": "1",
+      "key": null,
+      "refusal": "An event's `source` is empty: name where the event came from.",
+      "source": ""
+    },
+    {
+      "id": "",
+      "key": null,
+      "refusal": "An event's `id` is empty: name the event within its source.",
+      "source": "urn:x"
+    }
+  ],
+  "fence_keys": [
+    {
+      "epoch": "3",
+      "item": "4126",
+      "key": "fence:default:4126:3:open-pr",
+      "ledger": "default",
+      "refusal": null,
+      "step": "open-pr"
+    },
+    {
+      "epoch": "0",
+      "item": "01m84z0jyt4qqbb2vq8kqbr",
+      "key": "fence:default:01m84z0jyt4qqbb2vq8kqbr:0:push",
+      "ledger": "default",
+      "refusal": null,
+      "step": "push"
+    },
+    {
+      "epoch": "18446744073709551615",
+      "item": "1",
+      "key": "fence:a_b-1:1:18446744073709551615:a.b_c~D",
+      "ledger": "a_b-1",
+      "refusal": null,
+      "step": "a.b_c~D"
+    },
+    {
+      "epoch": "3",
+      "item": "4126",
+      "key": null,
+      "ledger": "Default",
+      "refusal": "`Default` is not a ledger name: use 1 to 64 lowercase letters, digits, `-` and `_`, starting and ending with a letter or a digit.",
+      "step": "push"
+    },
+    {
+      "epoch": "3",
+      "item": "#4126",
+      "key": null,
+      "ledger": "default",
+      "refusal": "`#4126` is not an item: use its number or its id, 1 to 64 lowercase letters and digits.",
+      "step": "push"
+    },
+    {
+      "epoch": "3",
+      "item": "4126",
+      "key": null,
+      "ledger": "default",
+      "refusal": "`a:b` is not a step: use 1 to 64 ASCII letters, digits, `-`, `.`, `_` and `~`.",
+      "step": "a:b"
+    }
+  ],
+  "fence_texts": [
+    {
+      "fence": {
+        "epoch": "3",
+        "item": "4126",
+        "key": "fence:default:4126:3:open-pr",
+        "ledger": "default",
+        "step": "open-pr"
+      },
+      "refusal": null,
+      "text": "fence:default:4126:3:open-pr"
+    },
+    {
+      "fence": {
+        "epoch": "18446744073709551615",
+        "item": "1",
+        "key": "fence:a_b-1:1:18446744073709551615:a.b_c~D",
+        "ledger": "a_b-1",
+        "step": "a.b_c~D"
+      },
+      "refusal": null,
+      "text": "fence:a_b-1:1:18446744073709551615:a.b_c~D"
+    },
+    {
+      "fence": null,
+      "refusal": "`default:4126:3:open-pr` is not a fencing key: a fencing key is `fence:{ledger}:{item}:{epoch}:{step}`.",
+      "text": "default:4126:3:open-pr"
+    },
+    {
+      "fence": null,
+      "refusal": "`fence:default:4126:3` is not a fencing key: a fencing key is `fence:{ledger}:{item}:{epoch}:{step}`.",
+      "text": "fence:default:4126:3"
+    },
+    {
+      "fence": null,
+      "refusal": "`fence:default:4126:3:push:x` is not a fencing key: a fencing key is `fence:{ledger}:{item}:{epoch}:{step}`.",
+      "text": "fence:default:4126:3:push:x"
+    },
+    {
+      "fence": null,
+      "refusal": "`03` is not a claim epoch: use decimal digits with no sign and no leading zero, at most 18446744073709551615.",
+      "text": "fence:default:4126:03:push"
+    },
+    {
+      "fence": null,
+      "refusal": "`-1` is not a claim epoch: use decimal digits with no sign and no leading zero, at most 18446744073709551615.",
+      "text": "fence:default:4126:-1:push"
+    },
+    {
+      "fence": null,
+      "refusal": "`Default` is not a ledger name: use 1 to 64 lowercase letters, digits, `-` and `_`, starting and ending with a letter or a digit.",
+      "text": "fence:Default:4126:3:push"
+    }
+  ],
+  "lift": [
+    {
+      "intake": {
+        "advisory": null,
+        "authored_time": "2026-11-23T20:00:00Z",
+        "entry": null,
+        "feed": null,
+        "key": "event:b3:0d4106be73b453e98dde550641618b3c8d814adcc15716d0c4c9c6d4b422bb44"
+      },
+      "name": "a foreign event",
+      "refusal": null
+    },
+    {
+      "intake": {
+        "advisory": "5f0c9e3a1b2d4c6e8f0a1b2c3d4e5f60:7",
+        "authored_time": "2026-11-23T20:00:52.197Z",
+        "entry": "urn:layer:talk:entry:01m84z0jyt0000000000007",
+        "feed": "urn:layer:talk",
+        "key": "event:b3:f8b0072e431ab22c4eef2621e4cb08104de988e9c9dedac339b8bbbf536c376d"
+      },
+      "name": "an ikigai layer entry from a peer",
+      "refusal": null
+    },
+    {
+      "intake": {
+        "advisory": "9",
+        "authored_time": null,
+        "entry": "urn:iki:ledger:default:transition:seq:9",
+        "feed": "urn:iki:ledger:default:transition",
+        "key": "event:b3:4974cef5c586eeb065a1699f1010782ded3ad0a1f51303d3b98b6d2cedb499cc"
+      },
+      "name": "an ikigai transition from a peer",
+      "refusal": null
+    },
+    {
+      "intake": {
+        "advisory": null,
+        "authored_time": null,
+        "entry": null,
+        "feed": null,
+        "key": "event:b3:1bbf2559525b19ffe00074f58f05c8ba7fd8a20b983c2cc73e060007537479bc"
+      },
+      "name": "an ikigai-looking id from a foreign source",
+      "refusal": null
+    },
+    {
+      "intake": null,
+      "name": "another specversion",
+      "refusal": "`0.3` is not a CloudEvents version these attributes follow: send `specversion` `1.0`."
+    },
+    {
+      "intake": null,
+      "name": "no type",
+      "refusal": "An event's `type` is empty: name what kind of event it is."
+    },
+    {
+      "intake": null,
+      "name": "no id",
+      "refusal": "An event's `id` is empty: name the event within its source."
+    },
+    {
+      "intake": null,
+      "name": "an epoch with no position",
+      "refusal": "An event names an `ikepoch` with no `ikseq`: send both, or neither."
+    },
+    {
+      "intake": null,
+      "name": "a position of zero",
+      "refusal": "`0` is not a sequence number: a feed's positions start at 1."
+    },
+    {
+      "intake": null,
+      "name": "a position as a padded number",
+      "refusal": "`007` is not a sequence number: use decimal digits with no sign and no leading zero, at most 18446744073709551615."
+    },
+    {
+      "intake": null,
+      "name": "a malformed epoch",
+      "refusal": "`E 1` is not a feed epoch: use 1 to 64 lowercase letters, digits and hyphens."
+    }
+  ],
+  "lower": [
+    {
+      "attributes": {
+        "datacontenttype": "text/turtle",
+        "id": "urn:layer:talk:entry:01m84z0jyt0000000000007",
+        "ikepoch": "5f0c9e3a1b2d4c6e8f0a1b2c3d4e5f60",
+        "ikseq": "7",
+        "source": "urn:layer:talk",
+        "specversion": "1.0",
+        "subject": null,
+        "time": "2026-11-23T20:00:52.197Z",
+        "traceparent": null,
+        "type": "say"
+      },
+      "name": "a layer entry with an epoch",
+      "refusal": null
+    },
+    {
+      "attributes": {
+        "datacontenttype": "application/ld+json",
+        "id": "urn:iki:ledger:default:transition:seq:9",
+        "ikepoch": null,
+        "ikseq": "9",
+        "source": "urn:iki:ledger:default:transition",
+        "specversion": "1.0",
+        "subject": "urn:iki:ledger:default:item:01m84z0jyt4qqbb2vq8kqbr",
+        "time": "2026-11-24T06:16:01.057Z",
+        "traceparent": "00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01",
+        "type": "https://ikigai-rs.dev/ns/ledger#Claimed"
+      },
+      "name": "a transition with a subject and a trace",
+      "refusal": null
+    },
+    {
+      "attributes": null,
+      "name": "a transition given another position",
+      "refusal": "`urn:iki:ledger:default:transition:seq:9` is at position 9, not 8: give the transition its own position."
+    },
+    {
+      "attributes": null,
+      "name": "an entry with no type",
+      "refusal": "An entry's type is empty: give its `rdf:type` IRI or its feed event's kind."
+    },
+    {
+      "attributes": {
+        "datacontenttype": null,
+        "id": "urn:layer:talk:entry:1",
+        "ikepoch": null,
+        "ikseq": "18446744073709551615",
+        "source": "urn:layer:talk",
+        "specversion": "1.0",
+        "subject": null,
+        "time": null,
+        "traceparent": null,
+        "type": "say"
+      },
+      "name": "the largest position",
+      "refusal": null
+    }
+  ],
+  "mapping": [
+    {
+      "attribute": "specversion",
+      "ikigai": "always `1.0`",
+      "required": true
+    },
+    {
+      "attribute": "id",
+      "ikigai": "the entry's IRI (`urn:layer:{layer}:entry:{id}`, `urn:iki:ledger:{ledger}:transition:seq:{n}`), unique within its source",
+      "required": true
+    },
+    {
+      "attribute": "source",
+      "ikigai": "the feed's source (`urn:layer:{layer}`, `urn:iki:ledger:{ledger}:transition`)",
+      "required": true
+    },
+    {
+      "attribute": "type",
+      "ikigai": "the entry's `rdf:type` as an IRI, or the feed event's kind (`say`, `out`, `taken`, `returned`, `sweep`)",
+      "required": true
+    },
+    {
+      "attribute": "subject",
+      "ikigai": "the resource the entry is about (a tuple's subject, an item's IRI), when it names one",
+      "required": false
+    },
+    {
+      "attribute": "time",
+      "ikigai": "`dcterms:created`, the host clock's stamp; taken in as AUTHORED time, never as commit order",
+      "required": false
+    },
+    {
+      "attribute": "datacontenttype",
+      "ikigai": "the media type of the entry's representation (`text/turtle`, `application/ld+json`)",
+      "required": false
+    },
+    {
+      "attribute": "ikseq",
+      "ikigai": "the entry's feed position (`ik:seq`) as decimal digits in a string; advisory when taken in, since only the receiving log assigns positions",
+      "required": false
+    },
+    {
+      "attribute": "ikepoch",
+      "ikigai": "the feed's epoch, when the feed names one",
+      "required": false
+    },
+    {
+      "attribute": "traceparent",
+      "ikigai": "the run's W3C trace context, when it has one",
+      "required": false
+    }
+  ],
+  "names": [
+    {
+      "entry": null,
+      "entry_refusal": "`urn:layer:talk` is not an entry: an entry is `urn:layer:{layer}:entry:{id}` or `urn:iki:ledger:{ledger}:transition:seq:{n}`.",
+      "feed": {
+        "family": "layer",
+        "feed": "urn:layer:talk:feed",
+        "source": "urn:layer:talk"
+      },
+      "feed_refusal": null,
+      "iri": "urn:layer:talk",
+      "listener": null,
+      "listener_refusal": "`urn:layer:talk` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": null,
+      "entry_refusal": "`urn:layer:talk:feed` is not an entry: an entry is `urn:layer:{layer}:entry:{id}` or `urn:iki:ledger:{ledger}:transition:seq:{n}`.",
+      "feed": {
+        "family": "layer",
+        "feed": "urn:layer:talk:feed",
+        "source": "urn:layer:talk"
+      },
+      "feed_refusal": null,
+      "iri": "urn:layer:talk:feed",
+      "listener": null,
+      "listener_refusal": "`urn:layer:talk:feed` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": null,
+      "entry_refusal": "`urn:layer:feed` is not an entry: an entry is `urn:layer:{layer}:entry:{id}` or `urn:iki:ledger:{ledger}:transition:seq:{n}`.",
+      "feed": {
+        "family": "layer",
+        "feed": "urn:layer:feed:feed",
+        "source": "urn:layer:feed"
+      },
+      "feed_refusal": null,
+      "iri": "urn:layer:feed",
+      "listener": null,
+      "listener_refusal": "`urn:layer:feed` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": null,
+      "entry_refusal": "`urn:layer:feed:feed` is not an entry: an entry is `urn:layer:{layer}:entry:{id}` or `urn:iki:ledger:{ledger}:transition:seq:{n}`.",
+      "feed": {
+        "family": "layer",
+        "feed": "urn:layer:feed:feed",
+        "source": "urn:layer:feed"
+      },
+      "feed_refusal": null,
+      "iri": "urn:layer:feed:feed",
+      "listener": null,
+      "listener_refusal": "`urn:layer:feed:feed` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": null,
+      "entry_refusal": "`urn:layer:talk:feed:feed` is not an entry: an entry is `urn:layer:{layer}:entry:{id}` or `urn:iki:ledger:{ledger}:transition:seq:{n}`.",
+      "feed": null,
+      "feed_refusal": "`urn:layer:talk:feed:feed` is not a feed: a feed is `urn:layer:{layer}`, `urn:layer:{layer}:feed` or `urn:iki:ledger:{ledger}:transition`.",
+      "iri": "urn:layer:talk:feed:feed",
+      "listener": null,
+      "listener_refusal": "`urn:layer:talk:feed:feed` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": {
+        "family": "layer",
+        "feed": "urn:layer:talk:feed",
+        "feed_source": "urn:layer:talk",
+        "id": "1",
+        "iri": "urn:layer:talk:entry:1",
+        "layer": "talk"
+      },
+      "entry_refusal": null,
+      "feed": null,
+      "feed_refusal": "`urn:layer:talk:entry:1` is not a feed: a feed is `urn:layer:{layer}`, `urn:layer:{layer}:feed` or `urn:iki:ledger:{ledger}:transition`.",
+      "iri": "urn:layer:talk:entry:1",
+      "listener": null,
+      "listener_refusal": "`urn:layer:talk:entry:1` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": {
+        "family": "layer",
+        "feed": "urn:layer:talk:feed",
+        "feed_source": "urn:layer:talk",
+        "id": "01m84z0jyt0000000000001",
+        "iri": "urn:layer:talk:entry:01m84z0jyt0000000000001",
+        "layer": "talk"
+      },
+      "entry_refusal": null,
+      "feed": null,
+      "feed_refusal": "`urn:layer:talk:entry:01m84z0jyt0000000000001` is not a feed: a feed is `urn:layer:{layer}`, `urn:layer:{layer}:feed` or `urn:iki:ledger:{ledger}:transition`.",
+      "iri": "urn:layer:talk:entry:01m84z0jyt0000000000001",
+      "listener": null,
+      "listener_refusal": "`urn:layer:talk:entry:01m84z0jyt0000000000001` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": null,
+      "entry_refusal": "An empty value is not an entry id: use 1 to 64 lowercase letters and digits.",
+      "feed": null,
+      "feed_refusal": "`urn:layer:talk:entry:` is not a feed: a feed is `urn:layer:{layer}`, `urn:layer:{layer}:feed` or `urn:iki:ledger:{ledger}:transition`.",
+      "iri": "urn:layer:talk:entry:",
+      "listener": null,
+      "listener_refusal": "`urn:layer:talk:entry:` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": null,
+      "entry_refusal": "`urn:layer:talk:entry:1:x` is not an entry: an entry is `urn:layer:{layer}:entry:{id}` or `urn:iki:ledger:{ledger}:transition:seq:{n}`.",
+      "feed": null,
+      "feed_refusal": "`urn:layer:talk:entry:1:x` is not a feed: a feed is `urn:layer:{layer}`, `urn:layer:{layer}:feed` or `urn:iki:ledger:{ledger}:transition`.",
+      "iri": "urn:layer:talk:entry:1:x",
+      "listener": null,
+      "listener_refusal": "`urn:layer:talk:entry:1:x` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": null,
+      "entry_refusal": "`urn:layer:talk:x:entry:1` is not an entry: an entry is `urn:layer:{layer}:entry:{id}` or `urn:iki:ledger:{ledger}:transition:seq:{n}`.",
+      "feed": null,
+      "feed_refusal": "`urn:layer:talk:x:entry:1` is not a feed: a feed is `urn:layer:{layer}`, `urn:layer:{layer}:feed` or `urn:iki:ledger:{ledger}:transition`.",
+      "iri": "urn:layer:talk:x:entry:1",
+      "listener": null,
+      "listener_refusal": "`urn:layer:talk:x:entry:1` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": null,
+      "entry_refusal": "`Talk` is not a layer name: use 1 to 24 lowercase letters, digits and hyphens, not starting or ending with a hyphen.",
+      "feed": null,
+      "feed_refusal": "`urn:layer:Talk:entry:1` is not a feed: a feed is `urn:layer:{layer}`, `urn:layer:{layer}:feed` or `urn:iki:ledger:{ledger}:transition`.",
+      "iri": "urn:layer:Talk:entry:1",
+      "listener": null,
+      "listener_refusal": "`urn:layer:Talk:entry:1` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": null,
+      "entry_refusal": "`urn:layer:talk:entries` is not an entry: an entry is `urn:layer:{layer}:entry:{id}` or `urn:iki:ledger:{ledger}:transition:seq:{n}`.",
+      "feed": null,
+      "feed_refusal": "`urn:layer:talk:entries` is not a feed: a feed is `urn:layer:{layer}`, `urn:layer:{layer}:feed` or `urn:iki:ledger:{ledger}:transition`.",
+      "iri": "urn:layer:talk:entries",
+      "listener": null,
+      "listener_refusal": "`urn:layer:talk:entries` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": null,
+      "entry_refusal": "`urn:layer:` is not an entry: an entry is `urn:layer:{layer}:entry:{id}` or `urn:iki:ledger:{ledger}:transition:seq:{n}`.",
+      "feed": null,
+      "feed_refusal": "An empty value is not a layer name: use 1 to 24 lowercase letters, digits and hyphens, not starting or ending with a hyphen.",
+      "iri": "urn:layer:",
+      "listener": null,
+      "listener_refusal": "`urn:layer:` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": null,
+      "entry_refusal": "`urn:iki:ledger:default:transition` is not an entry: an entry is `urn:layer:{layer}:entry:{id}` or `urn:iki:ledger:{ledger}:transition:seq:{n}`.",
+      "feed": {
+        "family": "transition",
+        "feed": "urn:iki:ledger:default:transition",
+        "source": "urn:iki:ledger:default:transition"
+      },
+      "feed_refusal": null,
+      "iri": "urn:iki:ledger:default:transition",
+      "listener": null,
+      "listener_refusal": "`urn:iki:ledger:default:transition` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": {
+        "family": "transition",
+        "feed": "urn:iki:ledger:default:transition",
+        "feed_source": "urn:iki:ledger:default:transition",
+        "iri": "urn:iki:ledger:default:transition:seq:1",
+        "ledger": "default",
+        "seq": "1"
+      },
+      "entry_refusal": null,
+      "feed": null,
+      "feed_refusal": "`urn:iki:ledger:default:transition:seq:1` is not a feed: a feed is `urn:layer:{layer}`, `urn:layer:{layer}:feed` or `urn:iki:ledger:{ledger}:transition`.",
+      "iri": "urn:iki:ledger:default:transition:seq:1",
+      "listener": null,
+      "listener_refusal": "`urn:iki:ledger:default:transition:seq:1` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": {
+        "family": "transition",
+        "feed": "urn:iki:ledger:a_b:transition",
+        "feed_source": "urn:iki:ledger:a_b:transition",
+        "iri": "urn:iki:ledger:a_b:transition:seq:18446744073709551615",
+        "ledger": "a_b",
+        "seq": "18446744073709551615"
+      },
+      "entry_refusal": null,
+      "feed": null,
+      "feed_refusal": "`urn:iki:ledger:a_b:transition:seq:18446744073709551615` is not a feed: a feed is `urn:layer:{layer}`, `urn:layer:{layer}:feed` or `urn:iki:ledger:{ledger}:transition`.",
+      "iri": "urn:iki:ledger:a_b:transition:seq:18446744073709551615",
+      "listener": null,
+      "listener_refusal": "`urn:iki:ledger:a_b:transition:seq:18446744073709551615` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": null,
+      "entry_refusal": "`18446744073709551616` is not a sequence number: use decimal digits with no sign and no leading zero, at most 18446744073709551615.",
+      "feed": null,
+      "feed_refusal": "`urn:iki:ledger:default:transition:seq:18446744073709551616` is not a feed: a feed is `urn:layer:{layer}`, `urn:layer:{layer}:feed` or `urn:iki:ledger:{ledger}:transition`.",
+      "iri": "urn:iki:ledger:default:transition:seq:18446744073709551616",
+      "listener": null,
+      "listener_refusal": "`urn:iki:ledger:default:transition:seq:18446744073709551616` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": null,
+      "entry_refusal": "`0` is not a sequence number: a feed's positions start at 1.",
+      "feed": null,
+      "feed_refusal": "`urn:iki:ledger:default:transition:seq:0` is not a feed: a feed is `urn:layer:{layer}`, `urn:layer:{layer}:feed` or `urn:iki:ledger:{ledger}:transition`.",
+      "iri": "urn:iki:ledger:default:transition:seq:0",
+      "listener": null,
+      "listener_refusal": "`urn:iki:ledger:default:transition:seq:0` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": null,
+      "entry_refusal": "`042` is not a sequence number: use decimal digits with no sign and no leading zero, at most 18446744073709551615.",
+      "feed": null,
+      "feed_refusal": "`urn:iki:ledger:default:transition:seq:042` is not a feed: a feed is `urn:layer:{layer}`, `urn:layer:{layer}:feed` or `urn:iki:ledger:{ledger}:transition`.",
+      "iri": "urn:iki:ledger:default:transition:seq:042",
+      "listener": null,
+      "listener_refusal": "`urn:iki:ledger:default:transition:seq:042` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": null,
+      "entry_refusal": "`urn:iki:ledger:transition` is not an entry: an entry is `urn:layer:{layer}:entry:{id}` or `urn:iki:ledger:{ledger}:transition:seq:{n}`.",
+      "feed": null,
+      "feed_refusal": "`urn:iki:ledger:transition` is not a feed: a feed is `urn:layer:{layer}`, `urn:layer:{layer}:feed` or `urn:iki:ledger:{ledger}:transition`.",
+      "iri": "urn:iki:ledger:transition",
+      "listener": null,
+      "listener_refusal": "`urn:iki:ledger:transition` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": null,
+      "entry_refusal": "`urn:iki:ledger:transition:seq:1` is not an entry: an entry is `urn:layer:{layer}:entry:{id}` or `urn:iki:ledger:{ledger}:transition:seq:{n}`.",
+      "feed": null,
+      "feed_refusal": "`urn:iki:ledger:transition:seq:1` is not a feed: a feed is `urn:layer:{layer}`, `urn:layer:{layer}:feed` or `urn:iki:ledger:{ledger}:transition`.",
+      "iri": "urn:iki:ledger:transition:seq:1",
+      "listener": null,
+      "listener_refusal": "`urn:iki:ledger:transition:seq:1` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": null,
+      "entry_refusal": "`urn:iki:ledger:a:b:transition:seq:1` is not an entry: an entry is `urn:layer:{layer}:entry:{id}` or `urn:iki:ledger:{ledger}:transition:seq:{n}`.",
+      "feed": null,
+      "feed_refusal": "`urn:iki:ledger:a:b:transition:seq:1` is not a feed: a feed is `urn:layer:{layer}`, `urn:layer:{layer}:feed` or `urn:iki:ledger:{ledger}:transition`.",
+      "iri": "urn:iki:ledger:a:b:transition:seq:1",
+      "listener": null,
+      "listener_refusal": "`urn:iki:ledger:a:b:transition:seq:1` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": null,
+      "entry_refusal": "`urn:iki:ledger:default:item:4126` is not an entry: an entry is `urn:layer:{layer}:entry:{id}` or `urn:iki:ledger:{ledger}:transition:seq:{n}`.",
+      "feed": null,
+      "feed_refusal": "`urn:iki:ledger:default:item:4126` is not a feed: a feed is `urn:layer:{layer}`, `urn:layer:{layer}:feed` or `urn:iki:ledger:{ledger}:transition`.",
+      "iri": "urn:iki:ledger:default:item:4126",
+      "listener": null,
+      "listener_refusal": "`urn:iki:ledger:default:item:4126` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": null,
+      "entry_refusal": "`urn:kernel:listener:id:7f3a` is not an entry: an entry is `urn:layer:{layer}:entry:{id}` or `urn:iki:ledger:{ledger}:transition:seq:{n}`.",
+      "feed": null,
+      "feed_refusal": "`urn:kernel:listener:id:7f3a` is not a feed: a feed is `urn:layer:{layer}`, `urn:layer:{layer}:feed` or `urn:iki:ledger:{ledger}:transition`.",
+      "iri": "urn:kernel:listener:id:7f3a",
+      "listener": {
+        "id": "7f3a",
+        "iri": "urn:kernel:listener:id:7f3a"
+      },
+      "listener_refusal": null
+    },
+    {
+      "entry": null,
+      "entry_refusal": "`urn:kernel:listener:id:` is not an entry: an entry is `urn:layer:{layer}:entry:{id}` or `urn:iki:ledger:{ledger}:transition:seq:{n}`.",
+      "feed": null,
+      "feed_refusal": "`urn:kernel:listener:id:` is not a feed: a feed is `urn:layer:{layer}`, `urn:layer:{layer}:feed` or `urn:iki:ledger:{ledger}:transition`.",
+      "iri": "urn:kernel:listener:id:",
+      "listener": null,
+      "listener_refusal": "An empty value is not a listener id: use 1 to 128 ASCII letters, digits, `-`, `.`, `_` and `~`."
+    },
+    {
+      "entry": null,
+      "entry_refusal": "`urn:kernel:listener:7f3a` is not an entry: an entry is `urn:layer:{layer}:entry:{id}` or `urn:iki:ledger:{ledger}:transition:seq:{n}`.",
+      "feed": null,
+      "feed_refusal": "`urn:kernel:listener:7f3a` is not a feed: a feed is `urn:layer:{layer}`, `urn:layer:{layer}:feed` or `urn:iki:ledger:{ledger}:transition`.",
+      "iri": "urn:kernel:listener:7f3a",
+      "listener": null,
+      "listener_refusal": "`urn:kernel:listener:7f3a` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": null,
+      "entry_refusal": "`URN:layer:talk` is not an entry: an entry is `urn:layer:{layer}:entry:{id}` or `urn:iki:ledger:{ledger}:transition:seq:{n}`.",
+      "feed": null,
+      "feed_refusal": "`URN:layer:talk` is not a feed: a feed is `urn:layer:{layer}`, `urn:layer:{layer}:feed` or `urn:iki:ledger:{ledger}:transition`.",
+      "iri": "URN:layer:talk",
+      "listener": null,
+      "listener_refusal": "`URN:layer:talk` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    },
+    {
+      "entry": null,
+      "entry_refusal": "`urn:layer:talk\\n` is not an entry: an entry is `urn:layer:{layer}:entry:{id}` or `urn:iki:ledger:{ledger}:transition:seq:{n}`.",
+      "feed": null,
+      "feed_refusal": "`talk\\n` is not a layer name: use 1 to 24 lowercase letters, digits and hyphens, not starting or ending with a hyphen.",
+      "iri": "urn:layer:talk\n",
+      "listener": null,
+      "listener_refusal": "`urn:layer:talk\\n` is not a listener: a listener is `urn:kernel:listener:id:{id}`."
+    }
+  ],
+  "tokens": {
+    "entry_id": [
+      {
+        "input": "1",
+        "refusal": null,
+        "token": "1"
+      },
+      {
+        "input": "01m84z0jyt0000000000001",
+        "refusal": null,
+        "token": "01m84z0jyt0000000000001"
+      },
+      {
+        "input": "",
+        "refusal": "An empty value is not an entry id: use 1 to 64 lowercase letters and digits.",
+        "token": null
+      },
+      {
+        "input": "Abc",
+        "refusal": "`Abc` is not an entry id: use 1 to 64 lowercase letters and digits.",
+        "token": null
+      },
+      {
+        "input": "a-b",
+        "refusal": "`a-b` is not an entry id: use 1 to 64 lowercase letters and digits.",
+        "token": null
+      },
+      {
+        "input": "a:b",
+        "refusal": "`a:b` is not an entry id: use 1 to 64 lowercase letters and digits.",
+        "token": null
+      }
+    ],
+    "epoch": [
+      {
+        "input": "5f0c9e3a1b2d4c6e8f0a1b2c3d4e5f60",
+        "refusal": null,
+        "token": "5f0c9e3a1b2d4c6e8f0a1b2c3d4e5f60"
+      },
+      {
+        "input": "e-1",
+        "refusal": null,
+        "token": "e-1"
+      },
+      {
+        "input": "",
+        "refusal": "An empty value is not a feed epoch: use 1 to 64 lowercase letters, digits and hyphens.",
+        "token": null
+      },
+      {
+        "input": "E1",
+        "refusal": "`E1` is not a feed epoch: use 1 to 64 lowercase letters, digits and hyphens.",
+        "token": null
+      },
+      {
+        "input": "a b",
+        "refusal": "`a b` is not a feed epoch: use 1 to 64 lowercase letters, digits and hyphens.",
+        "token": null
+      },
+      {
+        "input": "a:b",
+        "refusal": "`a:b` is not a feed epoch: use 1 to 64 lowercase letters, digits and hyphens.",
+        "token": null
+      },
+      {
+        "input": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "refusal": null,
+        "token": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      {
+        "input": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "refusal": "`aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa…` is not a feed epoch: use 1 to 64 lowercase letters, digits and hyphens.",
+        "token": null
+      }
+    ],
+    "item": [
+      {
+        "input": "4126",
+        "refusal": null,
+        "token": "4126"
+      },
+      {
+        "input": "01m84z0jyt4qqbb2vq8kqbr",
+        "refusal": null,
+        "token": "01m84z0jyt4qqbb2vq8kqbr"
+      },
+      {
+        "input": "",
+        "refusal": "An empty value is not an item: use its number or its id, 1 to 64 lowercase letters and digits.",
+        "token": null
+      },
+      {
+        "input": "#4126",
+        "refusal": "`#4126` is not an item: use its number or its id, 1 to 64 lowercase letters and digits.",
+        "token": null
+      },
+      {
+        "input": "A1",
+        "refusal": "`A1` is not an item: use its number or its id, 1 to 64 lowercase letters and digits.",
+        "token": null
+      }
+    ],
+    "layer": [
+      {
+        "input": "talk",
+        "refusal": null,
+        "token": "talk"
+      },
+      {
+        "input": "tasks-bobby",
+        "refusal": null,
+        "token": "tasks-bobby"
+      },
+      {
+        "input": "a",
+        "refusal": null,
+        "token": "a"
+      },
+      {
+        "input": "abcdefghijklmnopqrstuvwx",
+        "refusal": null,
+        "token": "abcdefghijklmnopqrstuvwx"
+      },
+      {
+        "input": "abcdefghijklmnopqrstuvwxy",
+        "refusal": "`abcdefghijklmnopqrstuvwxy` is not a layer name: use 1 to 24 lowercase letters, digits and hyphens, not starting or ending with a hyphen.",
+        "token": null
+      },
+      {
+        "input": "",
+        "refusal": "An empty value is not a layer name: use 1 to 24 lowercase letters, digits and hyphens, not starting or ending with a hyphen.",
+        "token": null
+      },
+      {
+        "input": "Talk",
+        "refusal": "`Talk` is not a layer name: use 1 to 24 lowercase letters, digits and hyphens, not starting or ending with a hyphen.",
+        "token": null
+      },
+      {
+        "input": "-talk",
+        "refusal": "`-talk` is not a layer name: use 1 to 24 lowercase letters, digits and hyphens, not starting or ending with a hyphen.",
+        "token": null
+      },
+      {
+        "input": "talk-",
+        "refusal": "`talk-` is not a layer name: use 1 to 24 lowercase letters, digits and hyphens, not starting or ending with a hyphen.",
+        "token": null
+      },
+      {
+        "input": "talk:x",
+        "refusal": "`talk:x` is not a layer name: use 1 to 24 lowercase letters, digits and hyphens, not starting or ending with a hyphen.",
+        "token": null
+      },
+      {
+        "input": "ta_lk",
+        "refusal": "`ta_lk` is not a layer name: use 1 to 24 lowercase letters, digits and hyphens, not starting or ending with a hyphen.",
+        "token": null
+      },
+      {
+        "input": "nul",
+        "refusal": null,
+        "token": "nul"
+      },
+      {
+        "input": "té",
+        "refusal": "`té` is not a layer name: use 1 to 24 lowercase letters, digits and hyphens, not starting or ending with a hyphen.",
+        "token": null
+      },
+      {
+        "input": "a\u001b[31m",
+        "refusal": "`a\\u{1b}[31m` is not a layer name: use 1 to 24 lowercase letters, digits and hyphens, not starting or ending with a hyphen.",
+        "token": null
+      }
+    ],
+    "ledger": [
+      {
+        "input": "default",
+        "refusal": null,
+        "token": "default"
+      },
+      {
+        "input": "a_b-1",
+        "refusal": null,
+        "token": "a_b-1"
+      },
+      {
+        "input": "x",
+        "refusal": null,
+        "token": "x"
+      },
+      {
+        "input": "",
+        "refusal": "An empty value is not a ledger name: use 1 to 64 lowercase letters, digits, `-` and `_`, starting and ending with a letter or a digit.",
+        "token": null
+      },
+      {
+        "input": "Acme",
+        "refusal": "`Acme` is not a ledger name: use 1 to 64 lowercase letters, digits, `-` and `_`, starting and ending with a letter or a digit.",
+        "token": null
+      },
+      {
+        "input": "-a",
+        "refusal": "`-a` is not a ledger name: use 1 to 64 lowercase letters, digits, `-` and `_`, starting and ending with a letter or a digit.",
+        "token": null
+      },
+      {
+        "input": "a_",
+        "refusal": "`a_` is not a ledger name: use 1 to 64 lowercase letters, digits, `-` and `_`, starting and ending with a letter or a digit.",
+        "token": null
+      },
+      {
+        "input": "a:b",
+        "refusal": "`a:b` is not a ledger name: use 1 to 64 lowercase letters, digits, `-` and `_`, starting and ending with a letter or a digit.",
+        "token": null
+      },
+      {
+        "input": "a b",
+        "refusal": "`a b` is not a ledger name: use 1 to 64 lowercase letters, digits, `-` and `_`, starting and ending with a letter or a digit.",
+        "token": null
+      }
+    ],
+    "listener_id": [
+      {
+        "input": "7f3a",
+        "refusal": null,
+        "token": "7f3a"
+      },
+      {
+        "input": "L-7f3a.b_c~d",
+        "refusal": null,
+        "token": "L-7f3a.b_c~d"
+      },
+      {
+        "input": "",
+        "refusal": "An empty value is not a listener id: use 1 to 128 ASCII letters, digits, `-`, `.`, `_` and `~`.",
+        "token": null
+      },
+      {
+        "input": "a:b",
+        "refusal": "`a:b` is not a listener id: use 1 to 128 ASCII letters, digits, `-`, `.`, `_` and `~`.",
+        "token": null
+      },
+      {
+        "input": "a/b",
+        "refusal": "`a/b` is not a listener id: use 1 to 128 ASCII letters, digits, `-`, `.`, `_` and `~`.",
+        "token": null
+      },
+      {
+        "input": "a%20b",
+        "refusal": "`a%20b` is not a listener id: use 1 to 128 ASCII letters, digits, `-`, `.`, `_` and `~`.",
+        "token": null
+      }
+    ],
+    "step": [
+      {
+        "input": "push",
+        "refusal": null,
+        "token": "push"
+      },
+      {
+        "input": "open-pr",
+        "refusal": null,
+        "token": "open-pr"
+      },
+      {
+        "input": "a.b_c~D",
+        "refusal": null,
+        "token": "a.b_c~D"
+      },
+      {
+        "input": "",
+        "refusal": "An empty value is not a step: use 1 to 64 ASCII letters, digits, `-`, `.`, `_` and `~`.",
+        "token": null
+      },
+      {
+        "input": "a:b",
+        "refusal": "`a:b` is not a step: use 1 to 64 ASCII letters, digits, `-`, `.`, `_` and `~`.",
+        "token": null
+      },
+      {
+        "input": "a b",
+        "refusal": "`a b` is not a step: use 1 to 64 ASCII letters, digits, `-`, `.`, `_` and `~`.",
+        "token": null
+      }
+    ]
+  }
+}

@@ -9,7 +9,15 @@ repository.workspace = true
 readme = "../../README.md"
 keywords = ["ikigai", "roc", "events", "cloudevents", "rdf"]
 categories = ["wasm"]
-# A scaffold: nothing is published until the identifiers are designed and tested.
+# Unpublished until the identifiers are reviewed (ledger #4126).
 publish = false
 
 [dependencies]
+# For core's types, not its kernel: `IdempotencyKey` (the token a keyed Sink takes, with its
+# one alphabet check) and `ContentHasher`/`ContentId` (core's digest and its `b3:` text form),
+# so neither is restated here. 0.4.2 is the floor: the idempotency toolkit arrived there.
+ikigai-core = "0.4.2"
+
+[dev-dependencies]
+# Reads the vector cases and writes the vectors (tests/vectors.rs).
+serde_json = "1"

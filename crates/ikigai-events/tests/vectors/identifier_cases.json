@@ -1,0 +1,156 @@
+{
+  "about": "Inputs for identifier_vectors.json (crates/ikigai-events/tests/vectors.rs). Every 64-bit number (a sequence number, a cursor position, a claim epoch) is written as a STRING of decimal digits, so a face whose numbers are doubles reads it exactly.",
+  "tokens": {
+    "layer": ["talk", "tasks-bobby", "a", "abcdefghijklmnopqrstuvwx", "abcdefghijklmnopqrstuvwxy", "", "Talk", "-talk", "talk-", "talk:x", "ta_lk", "nul", "té", "a\u001b[31m"],
+    "ledger": ["default", "a_b-1", "x", "", "Acme", "-a", "a_", "a:b", "a b"],
+    "entry_id": ["1", "01m84z0jyt0000000000001", "", "Abc", "a-b", "a:b"],
+    "epoch": ["5f0c9e3a1b2d4c6e8f0a1b2c3d4e5f60", "e-1", "", "E1", "a b", "a:b", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"],
+    "listener_id": ["7f3a", "L-7f3a.b_c~d", "", "a:b", "a/b", "a%20b"],
+    "item": ["4126", "01m84z0jyt4qqbb2vq8kqbr", "", "#4126", "A1"],
+    "step": ["push", "open-pr", "a.b_c~D", "", "a:b", "a b"]
+  },
+  "names": [
+    "urn:layer:talk",
+    "urn:layer:talk:feed",
+    "urn:layer:feed",
+    "urn:layer:feed:feed",
+    "urn:layer:talk:feed:feed",
+    "urn:layer:talk:entry:1",
+    "urn:layer:talk:entry:01m84z0jyt0000000000001",
+    "urn:layer:talk:entry:",
+    "urn:layer:talk:entry:1:x",
+    "urn:layer:talk:x:entry:1",
+    "urn:layer:Talk:entry:1",
+    "urn:layer:talk:entries",
+    "urn:layer:",
+    "urn:iki:ledger:default:transition",
+    "urn:iki:ledger:default:transition:seq:1",
+    "urn:iki:ledger:a_b:transition:seq:18446744073709551615",
+    "urn:iki:ledger:default:transition:seq:18446744073709551616",
+    "urn:iki:ledger:default:transition:seq:0",
+    "urn:iki:ledger:default:transition:seq:042",
+    "urn:iki:ledger:transition",
+    "urn:iki:ledger:transition:seq:1",
+    "urn:iki:ledger:a:b:transition:seq:1",
+    "urn:iki:ledger:default:item:4126",
+    "urn:kernel:listener:id:7f3a",
+    "urn:kernel:listener:id:",
+    "urn:kernel:listener:7f3a",
+    "URN:layer:talk",
+    "urn:layer:talk\n"
+  ],
+  "cursors": ["0", "12", "18446744073709551615", "5f0c9e3a1b2d4c6e8f0a1b2c3d4e5f60:12", "e-1:0", "", ":5", "e1:", "E1:5", "e1:01", "e1:5:6", "-1", "+1", "18446744073709551616"],
+  "event_keys": [
+    {"source": "urn:layer:talk", "id": "urn:layer:talk:entry:01m84z0jyt0000000000001"},
+    {"source": "urn:iki:ledger:default:transition", "id": "urn:iki:ledger:default:transition:seq:9"},
+    {"source": "https://example.com/sensors/tn-1234567", "id": "A234-1234-1234"},
+    {"source": "ab", "id": "c"},
+    {"source": "a", "id": "bc"},
+    {"source": "/relative/source", "id": "événement 🎉"},
+    {"source": "", "id": "1"},
+    {"source": "urn:x", "id": ""}
+  ],
+  "fence_keys": [
+    {"ledger": "default", "item": "4126", "epoch": "3", "step": "open-pr"},
+    {"ledger": "default", "item": "01m84z0jyt4qqbb2vq8kqbr", "epoch": "0", "step": "push"},
+    {"ledger": "a_b-1", "item": "1", "epoch": "18446744073709551615", "step": "a.b_c~D"},
+    {"ledger": "Default", "item": "4126", "epoch": "3", "step": "push"},
+    {"ledger": "default", "item": "#4126", "epoch": "3", "step": "push"},
+    {"ledger": "default", "item": "4126", "epoch": "3", "step": "a:b"}
+  ],
+  "fence_texts": [
+    "fence:default:4126:3:open-pr",
+    "fence:a_b-1:1:18446744073709551615:a.b_c~D",
+    "default:4126:3:open-pr",
+    "fence:default:4126:3",
+    "fence:default:4126:3:push:x",
+    "fence:default:4126:03:push",
+    "fence:default:4126:-1:push",
+    "fence:Default:4126:3:push"
+  ],
+  "lower": [
+    {
+      "name": "a layer entry with an epoch",
+      "entry": "urn:layer:talk:entry:01m84z0jyt0000000000007",
+      "seq": "7",
+      "epoch": "5f0c9e3a1b2d4c6e8f0a1b2c3d4e5f60",
+      "kind": "say",
+      "created": "2026-11-23T20:00:52.197Z",
+      "content_type": "text/turtle"
+    },
+    {
+      "name": "a transition with a subject and a trace",
+      "entry": "urn:iki:ledger:default:transition:seq:9",
+      "seq": "9",
+      "kind": "https://ikigai-rs.dev/ns/ledger#Claimed",
+      "subject": "urn:iki:ledger:default:item:01m84z0jyt4qqbb2vq8kqbr",
+      "created": "2026-11-24T06:16:01.057Z",
+      "content_type": "application/ld+json",
+      "traceparent": "00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01"
+    },
+    {
+      "name": "a transition given another position",
+      "entry": "urn:iki:ledger:default:transition:seq:9",
+      "seq": "8",
+      "kind": "claimed"
+    },
+    {
+      "name": "an entry with no type",
+      "entry": "urn:layer:talk:entry:1",
+      "seq": "1",
+      "kind": ""
+    },
+    {
+      "name": "the largest position",
+      "entry": "urn:layer:talk:entry:1",
+      "seq": "18446744073709551615",
+      "kind": "say"
+    }
+  ],
+  "lift": [
+    {
+      "name": "a foreign event",
+      "attributes": {"specversion": "1.0", "id": "A234-1234-1234", "source": "https://example.com/sensors/tn-1234567", "type": "com.example.reading", "time": "2026-11-23T20:00:00Z"}
+    },
+    {
+      "name": "an ikigai layer entry from a peer",
+      "attributes": {"specversion": "1.0", "id": "urn:layer:talk:entry:01m84z0jyt0000000000007", "source": "urn:layer:talk", "type": "say", "time": "2026-11-23T20:00:52.197Z", "datacontenttype": "text/turtle", "ikseq": "7", "ikepoch": "5f0c9e3a1b2d4c6e8f0a1b2c3d4e5f60"}
+    },
+    {
+      "name": "an ikigai transition from a peer",
+      "attributes": {"specversion": "1.0", "id": "urn:iki:ledger:default:transition:seq:9", "source": "urn:iki:ledger:default:transition", "type": "claimed", "ikseq": "9"}
+    },
+    {
+      "name": "an ikigai-looking id from a foreign source",
+      "attributes": {"specversion": "1.0", "id": "urn:layer:talk:entry:1", "source": "https://example.com/", "type": "say"}
+    },
+    {
+      "name": "another specversion",
+      "attributes": {"specversion": "0.3", "id": "1", "source": "urn:x", "type": "t"}
+    },
+    {
+      "name": "no type",
+      "attributes": {"specversion": "1.0", "id": "1", "source": "urn:x", "type": ""}
+    },
+    {
+      "name": "no id",
+      "attributes": {"specversion": "1.0", "id": "", "source": "urn:x", "type": "t"}
+    },
+    {
+      "name": "an epoch with no position",
+      "attributes": {"specversion": "1.0", "id": "1", "source": "urn:x", "type": "t", "ikepoch": "e1"}
+    },
+    {
+      "name": "a position of zero",
+      "attributes": {"specversion": "1.0", "id": "1", "source": "urn:x", "type": "t", "ikseq": "0"}
+    },
+    {
+      "name": "a position as a padded number",
+      "attributes": {"specversion": "1.0", "id": "1", "source": "urn:x", "type": "t", "ikseq": "007"}
+    },
+    {
+      "name": "a malformed epoch",
+      "attributes": {"specversion": "1.0", "id": "1", "source": "urn:x", "type": "t", "ikseq": "1", "ikepoch": "E 1"}
+    }
+  ]
+}
