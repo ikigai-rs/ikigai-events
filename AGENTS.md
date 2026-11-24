@@ -1,6 +1,6 @@
 # Working in this repository
 
-`ikigai-events` is a scaffold today: the identifiers ikigai's event-facing modules share, and
+`ikigai-events` holds the identifiers ikigai's event-facing modules share, and
 subcrates for specific bridges. These rules are for every agent and every person working here.
 `CLAUDE.md` is a link to this file.
 

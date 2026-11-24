@@ -22,7 +22,42 @@ Its rules hold here: a golden-thread cut is a hint to re-read, never an event; o
 belong to the log that owns the entries; effects are made safe by idempotency keys and fencing,
 never by an exactly-once promise; and authority never travels with an event.
 
-Status: scaffold. Nothing is published.
+Status: the identifiers crate is built and unpublished (`publish = false` until it is reviewed).
+No bridge exists yet.
+
+## The resource map
+
+Names are singular, the type first, and every partition is by a named key. The identifiers
+crate holds NO state and serves no endpoint: it is the one place these names, keys and the
+mapping are spelled, so the modules that own the atoms (the layer host, the ledger, the
+kernel, a relay) and every consumer agree. Each row is a type in `crates/ikigai-events`.
+
+| set | name or form | kind | owner of the atom | type |
+|---|---|---|---|---|
+| a layer feed | source `urn:layer:{layer}`; read at `urn:layer:{layer}:feed` (`after=`, `wait=`, `epoch=`) | composition | ikigai-layers | `Feed::Layer` |
+| a layer entry | `urn:layer:{layer}:entry:{id}` | **ATOM**, immutable | ikigai-layers | `Entry::Layer` |
+| a ledger's transitions | `urn:iki:ledger:{ledger}:transition` (source and feed are one name) | composition | ikigai-ledger (ledger #4116) | `Feed::Transition` |
+| a ledger transition | `urn:iki:ledger:{ledger}:transition:seq:{n}`, `n` from 1 | **ATOM**, immutable | ikigai-ledger (ledger #4116) | `Entry::Transition` |
+| a feed epoch | a token, `[a-z0-9-]{1,64}` | value | the door that owns the feed | `FeedEpoch` |
+| a cursor's value | `{epoch}:{after}`, or `{after}` for a feed with no epoch; also a server-sent event's `id` | value | the consumer | `Cursor` |
+| a listener | `urn:kernel:listener:id:{id}` | **ATOM** (session state) | ikigai-core (ledger #4112) | `Listener` |
+| an event's idempotency key | `event:b3:{hex}`, from (source, id) | value | whoever takes the event in | `event_key` |
+| a fencing key | `fence:{ledger}:{item}:{epoch}:{step}` | value | whoever performs the effect | `FenceKey` |
+| the CloudEvents mapping | attribute ↔ ikigai term | data and two functions | this crate | `cloudevents::{MAPPING, lower, lift}` |
+
+Three decisions the map carries:
+
+- **A cursor's NAME belongs to its consumer.** A cursor is an atom in the consumer's own space,
+  written after the effect is recorded (a relay's is its subscription's). What every consumer
+  shares is the cursor's value and its text, so that is what this crate names.
+- **One spelling per name.** No name is percent-encoded: a token outside its alphabet is
+  refused with one sentence. A ledger's transitions are always named with the ledger,
+  `default` included, because an idempotency key derived from a `source` needs one spelling.
+- **Keys are core's.** Both keys are `ikigai_core::IdempotencyKey`s, so a keyed Sink takes
+  either as `idempotency-key=` unchanged, and the event key's digest is core's `b3:` content id.
+
+The shared vectors, which the Python, TypeScript and .NET faces copy verbatim, are
+[`crates/ikigai-events/tests/vectors/`](crates/ikigai-events/tests/vectors/README.md).
 
 ## License
 
