@@ -6,3 +6,4 @@
 
 # Named explicitly, so content detection can never decide them.
 crates/ikigai-events/tests/vectors/*.json text eol=lf
+crates/ikigai-events-cloudevents/tests/vectors/*.json text eol=lf

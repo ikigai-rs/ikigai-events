@@ -1,0 +1,205 @@
+{
+  "about": "Inputs for cloudevents_vectors.json (crates/ikigai-events-cloudevents/tests/vectors.rs). Each event and batch is JSON TEXT, kept as a string so its bytes are the input.",
+  "events": [
+    {
+      "name": "minimal",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\"}"
+    },
+    {
+      "name": "full",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"subject\":\"tn-1234567/reading/7\",\"time\":\"2026-11-23T20:00:00.197Z\",\"datacontenttype\":\"application/json\",\"dataschema\":\"https://example.com/schema/reading.json\",\"traceparent\":\"00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01\",\"comexampleregion\":\"eu-west\",\"retries\":3,\"replay\":false,\"data\":{\"celsius\":21.5,\"unit\":\"C\",\"tags\":[\"a\",\"b\"]}}"
+    },
+    {
+      "name": "ikigai-layer-entry",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"urn:layer:talk:entry:01m84z0jyt0000000000007\",\"source\":\"urn:layer:talk\",\"type\":\"say\",\"time\":\"2026-11-23T20:00:52.197Z\",\"datacontenttype\":\"text/turtle\",\"ikseq\":\"7\",\"ikepoch\":\"5f0c9e3a1b2d4c6e8f0a1b2c3d4e5f60\",\"data\":\"<urn:layer:talk:entry:01m84z0jyt0000000000007> <https://ikigai-rs.dev/ns#body> \\\"hello\\\" .\"}"
+    },
+    {
+      "name": "ikigai-transition",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"urn:iki:ledger:default:transition:seq:9\",\"source\":\"urn:iki:ledger:default:transition\",\"type\":\"claimed\",\"subject\":\"urn:iki:ledger:default:item:4126\",\"ikseq\":\"9\"}"
+    },
+    {
+      "name": "binary-data",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"datacontenttype\":\"application/octet-stream\",\"data_base64\":\"aGVsbG8gd29ybGQ=\"}"
+    },
+    {
+      "name": "null-is-absent",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"subject\":null,\"data\":null,\"comexampleflag\":null}"
+    },
+    {
+      "name": "relative-source-and-unicode-id",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"événement 🎉\",\"source\":\"/relative/source\",\"type\":\"k\"}"
+    },
+    {
+      "name": "later-traceparent-version",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"traceparent\":\"cc-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01-what-comes-next\"}"
+    },
+    {
+      "name": "lowercase-t-and-z",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"time\":\"2026-11-23t20:00:00z\"}"
+    },
+    {
+      "name": "data-at-the-nesting-bound",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"d\",\"source\":\"urn:x\",\"type\":\"k\",\"data\":[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[1]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]}"
+    },
+    {
+      "name": "no-type",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"1\",\"source\":\"urn:x\"}"
+    },
+    {
+      "name": "wrong-specversion",
+      "json": "{\"specversion\":\"0.3\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\"}"
+    },
+    {
+      "name": "empty-id",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\"}"
+    },
+    {
+      "name": "id-not-a-string",
+      "json": "{\"specversion\":\"1.0\",\"id\":7,\"source\":\"urn:x\",\"type\":\"k\"}"
+    },
+    {
+      "name": "source-with-space",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"urn:has space\",\"type\":\"com.example.reading\"}"
+    },
+    {
+      "name": "source-not-ascii",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://exämple.com/\",\"type\":\"com.example.reading\"}"
+    },
+    {
+      "name": "time-without-offset",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"time\":\"2026-11-23T20:00:00\"}"
+    },
+    {
+      "name": "time-not-a-time",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"time\":\"yesterday\"}"
+    },
+    {
+      "name": "dataschema-relative",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"dataschema\":\"/schema.json\"}"
+    },
+    {
+      "name": "traceparent-uppercase",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"traceparent\":\"00-4BF92F3577B34DA6A3CE929D0E0E4736-00F067AA0BA902B7-01\"}"
+    },
+    {
+      "name": "traceparent-version-ff",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"traceparent\":\"ff-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01\"}"
+    },
+    {
+      "name": "traceparent-zero-trace",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"traceparent\":\"00-00000000000000000000000000000000-00f067aa0ba902b7-01\"}"
+    },
+    {
+      "name": "traceparent-zero-parent",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"traceparent\":\"00-4bf92f3577b34da6a3ce929d0e0e4736-0000000000000000-01\"}"
+    },
+    {
+      "name": "traceparent-version-00-too-long",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"traceparent\":\"00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01-x\"}"
+    },
+    {
+      "name": "ikseq-a-number",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"ikseq\":7}"
+    },
+    {
+      "name": "ikseq-zero",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"ikseq\":\"0\"}"
+    },
+    {
+      "name": "ikepoch-without-ikseq",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"ikepoch\":\"e-1\"}"
+    },
+    {
+      "name": "extension-name-uppercase",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"Region\":\"eu\"}"
+    },
+    {
+      "name": "extension-name-underscore",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"region_name\":\"eu\"}"
+    },
+    {
+      "name": "extension-a-fraction",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"ratio\":0.5}"
+    },
+    {
+      "name": "extension-past-32-bits",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"big\":2147483648}"
+    },
+    {
+      "name": "extension-an-object",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"meta\":{\"a\":1}}"
+    },
+    {
+      "name": "both-data-and-data-base64",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"data\":\"x\",\"data_base64\":\"eA==\"}"
+    },
+    {
+      "name": "data-base64-unpadded",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"data_base64\":\"aGVsbG8\"}"
+    },
+    {
+      "name": "empty-subject",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"subject\":\"\"}"
+    },
+    {
+      "name": "data-past-the-nesting-bound",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"d\",\"source\":\"urn:x\",\"type\":\"k\",\"data\":[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[1]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]}"
+    },
+    {
+      "name": "an-array",
+      "json": "[]"
+    },
+    {
+      "name": "not-json",
+      "json": "{\"specversion\":"
+    }
+  ],
+  "batches": [
+    {
+      "name": "empty",
+      "json": "[]"
+    },
+    {
+      "name": "two",
+      "json": "[{\"specversion\":\"1.0\",\"id\":\"1\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\"},{\"specversion\":\"1.0\",\"id\":\"2\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"time\":\"2026-11-23T20:00:00Z\"}]"
+    },
+    {
+      "name": "a-redelivery-inside-one-batch",
+      "json": "[{\"specversion\":\"1.0\",\"id\":\"1\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\"},{\"specversion\":\"1.0\",\"id\":\"1\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\"}]"
+    },
+    {
+      "name": "same-source-and-id-but-different",
+      "json": "[{\"specversion\":\"1.0\",\"id\":\"1\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\"},{\"specversion\":\"1.0\",\"id\":\"1\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"subject\":\"other\"}]"
+    },
+    {
+      "name": "a-member-not-an-object",
+      "json": "[{\"specversion\":\"1.0\",\"id\":\"1\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\"},7]"
+    },
+    {
+      "name": "an-object",
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\"}"
+    }
+  ],
+  "turtle": [
+    {
+      "name": "empty",
+      "turtle": ""
+    },
+    {
+      "name": "a-foreign-node",
+      "turtle": "<urn:x> <https://ikigai-rs.dev/ns/cloudevents#id> \"1\" ."
+    },
+    {
+      "name": "a-blank-node",
+      "turtle": "[] <https://ikigai-rs.dev/ns/cloudevents#id> \"1\" ."
+    },
+    {
+      "name": "a-property-outside-the-form",
+      "turtle": "<urn:iki:event:key:b3:00> <http://purl.org/dc/terms/created> \"2026-11-23T20:00:00Z\" ."
+    },
+    {
+      "name": "not-turtle",
+      "turtle": "<urn:iki:event:key:b3:00> <"
+    }
+  ]
+}

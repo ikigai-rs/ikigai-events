@@ -30,7 +30,9 @@ pub struct Refusal {
 }
 
 impl Refusal {
-    pub(crate) fn new(sentence: impl Into<String>) -> Self {
+    /// A refusal of one sentence. For a bridge crate that refuses in the same form: name what
+    /// was wrong and what to do, quoting the refused input with [`shown`].
+    pub fn new(sentence: impl Into<String>) -> Self {
         Refusal {
             sentence: sentence.into(),
         }
@@ -65,7 +67,14 @@ pub const SHOWN: usize = 64;
 
 /// `input` as a refusal's sentence begins with it: in backticks, escaped, cut to [`SHOWN`]
 /// characters; or `An empty value`, which reads better aloud than an empty pair of backticks.
-pub(crate) fn shown(input: &str) -> String {
+///
+/// ```
+/// use ikigai_events::shown;
+///
+/// assert_eq!(shown("a\u{1b}[31m"), "`a\\u{1b}[31m`");
+/// assert_eq!(shown(""), "An empty value");
+/// ```
+pub fn shown(input: &str) -> String {
     if input.is_empty() {
         return "An empty value".to_string();
     }

@@ -1,0 +1,42 @@
+[package]
+name = "ikigai-events-cloudevents"
+description = "CloudEvents for ikigai: application/cloudevents+json and its batch form lifted to Turtle and lowered back, as a transreptor pair, with the keyed Sink an intake writes."
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+readme = "README.md"
+keywords = ["ikigai", "roc", "events", "cloudevents", "rdf"]
+categories = ["wasm"]
+# Unpublished until reviewed, like the identifiers crate it builds on (ledger #4117).
+publish = false
+
+[dependencies]
+# The shared identifiers: the attribute mapping (`cloudevents::{lift, lower, Attributes}`), the
+# event key and the one refusal type. Same workspace, so a path (not an override).
+ikigai-events = { path = "../ikigai-events" }
+# The kernel's types: `Endpoint`, `Description`, `Request`, `IdempotencyKey`. 0.4.2 is the
+# identifiers crate's floor (the idempotency toolkit).
+ikigai-core = "0.4.2"
+# The ecosystem's one JSON nesting scan (`check_json_nesting`) and Turtle nesting scan
+# (`check_turtle_nesting`), run before any parse; no transreption features needed.
+ikigai-rdf = { version = "0.6.0", default-features = false }
+async-trait = "0.1"
+# The JSON parser and string escaper (already in core's graph).
+serde_json = "1"
+# The Turtle form: oxrdf's terms and oxttl's parser and serializer (oxigraph's pure crates,
+# wasm-clean). oxttl 0.2.3 is core's own floor for it.
+oxrdf = "0.3"
+oxttl = "0.2.3"
+# RFC 3986/3987 reference parsing for `source` and `dataschema` (already in core's graph).
+oxiri = "0.2.11"
+# RFC 3339 `time`: `time`'s well-known Rfc3339 parser. `parsing` only; no clock, no formatting.
+time = { version = "0.3.36", default-features = false, features = ["parsing"] }
+# RFC 4648 `data_base64`, checked with base64's STANDARD engine (padded, as RFC 4648 section 4).
+base64 = "0.22"
+
+[dev-dependencies]
+futures = "0.3"
+# The module recipe as one test (tests/conformance.rs). 0.15.0 is conformance on core 0.4.
+ikigai-conformance = "0.15.0"
