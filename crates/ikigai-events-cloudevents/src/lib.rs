@@ -215,7 +215,7 @@ impl Event {
             }
         }
         match &self.data {
-            Some(Data::Base64(text)) => check::base64(text)?,
+            Some(Data::Base64(text)) => check::data_base64(text)?,
             Some(Data::Json(serde_json::Value::String(_))) => {
                 return Err(Refusal::new(
                     "An event's JSON data is a string: give it as text data instead.",

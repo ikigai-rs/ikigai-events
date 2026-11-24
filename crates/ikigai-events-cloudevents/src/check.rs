@@ -52,7 +52,7 @@ pub(crate) fn dataschema(value: &str) -> Result<(), Refusal> {
 
 /// `data_base64`: base64 as RFC 4648 section 4 writes it (the standard alphabet, padded), read
 /// by the `base64` crate's STANDARD engine.
-pub(crate) fn base64(value: &str) -> Result<(), Refusal> {
+pub(crate) fn data_base64(value: &str) -> Result<(), Refusal> {
     base64::engine::general_purpose::STANDARD
         .decode(value)
         .map(|_| ())
@@ -217,11 +217,11 @@ mod tests {
     }
 
     #[test]
-    fn base64_is_standard_and_padded() {
-        assert!(base64("aGVsbG8=").is_ok());
-        assert!(base64("").is_ok());
-        assert!(base64("aGVsbG8").is_err());
-        assert!(base64("aGVs bG8=").is_err());
-        assert!(base64("aGVsbG8_").is_err());
+    fn data_base64_is_standard_and_padded() {
+        assert!(data_base64("aGVsbG8=").is_ok());
+        assert!(data_base64("").is_ok());
+        assert!(data_base64("aGVsbG8").is_err());
+        assert!(data_base64("aGVs bG8=").is_err());
+        assert!(data_base64("aGVsbG8_").is_err());
     }
 }
