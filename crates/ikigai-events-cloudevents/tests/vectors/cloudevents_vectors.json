@@ -1,0 +1,494 @@
+{
+  "about": "CloudEvents vectors (ledger #4117) computed from tests/vectors/cloudevents_cases.json by crates/ikigai-events-cloudevents/tests/vectors.rs, which fails if this file differs from what it computes. Every input is TEXT, its bytes the input. Where the crate refuses, the outputs are null and `refusal` holds its one sentence; a face must refuse exactly there, and matching the sentence byte for byte is recommended. `events`: one event read, written back (`json`), keyed (`key`, the identifiers crate's event key), named (`node`) and lifted (`turtle`), with what it gives an intake. `batches`: a batch read, written back and lifted. `turtle`: a form lowered to a batch. Every `turtle` an event or batch row holds lowers back to that row's `json`.",
+  "batches": [
+    {
+      "input": "[]",
+      "json": "[]",
+      "name": "empty",
+      "refusal": null,
+      "turtle": ""
+    },
+    {
+      "input": "[{\"specversion\":\"1.0\",\"id\":\"1\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\"},{\"specversion\":\"1.0\",\"id\":\"2\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"time\":\"2026-11-23T20:00:00Z\"}]",
+      "json": "[{\"specversion\":\"1.0\",\"id\":\"1\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\"},{\"specversion\":\"1.0\",\"id\":\"2\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"time\":\"2026-11-23T20:00:00Z\"}]",
+      "name": "two",
+      "refusal": null,
+      "turtle": "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix ce: <https://ikigai-rs.dev/ns/cloudevents#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n<urn:iki:event:key:b3:d2f6e35323cdce62c2042f6f1186c6092ec6b879ae8a2367fda9d2f931ea3d8d> a ce:Event ;\n\tce:specversion \"1.0\" ;\n\tce:id \"1\" ;\n\tce:source \"https://example.com/sensors/tn-1234567\"^^xsd:anyURI ;\n\tce:type \"com.example.reading\" .\n<urn:iki:event:key:b3:24d93bbccf0ef91e4511c84b76c9211633a4067cd8c1174ea25c0d07b1d8f02f> a ce:Event ;\n\tce:specversion \"1.0\" ;\n\tce:id \"2\" ;\n\tce:source \"https://example.com/sensors/tn-1234567\"^^xsd:anyURI ;\n\tce:type \"com.example.reading\" ;\n\tce:time \"2026-11-23T20:00:00Z\"^^xsd:dateTime .\n"
+    },
+    {
+      "input": "[{\"specversion\":\"1.0\",\"id\":\"1\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\"},{\"specversion\":\"1.0\",\"id\":\"1\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\"}]",
+      "json": "[{\"specversion\":\"1.0\",\"id\":\"1\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\"},{\"specversion\":\"1.0\",\"id\":\"1\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\"}]",
+      "name": "a-redelivery-inside-one-batch",
+      "refusal": null,
+      "turtle": "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix ce: <https://ikigai-rs.dev/ns/cloudevents#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n<urn:iki:event:key:b3:d2f6e35323cdce62c2042f6f1186c6092ec6b879ae8a2367fda9d2f931ea3d8d> a ce:Event ;\n\tce:specversion \"1.0\" ;\n\tce:id \"1\" ;\n\tce:source \"https://example.com/sensors/tn-1234567\"^^xsd:anyURI ;\n\tce:type \"com.example.reading\" .\n"
+    },
+    {
+      "input": "[{\"specversion\":\"1.0\",\"id\":\"1\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\"},{\"specversion\":\"1.0\",\"id\":\"1\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"subject\":\"other\"}]",
+      "json": null,
+      "name": "same-source-and-id-but-different",
+      "refusal": "Two events share the `source` `https://example.com/sensors/tn-1234567` and the `id` `1` but differ: an event's `source` and `id` name it, so send one of them.",
+      "turtle": null
+    },
+    {
+      "input": "[{\"specversion\":\"1.0\",\"id\":\"1\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\"},7]",
+      "json": null,
+      "name": "a-member-not-an-object",
+      "refusal": "A batch holds a number, not an event: every member of a batch is one JSON object.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\"}",
+      "json": null,
+      "name": "an-object",
+      "refusal": "The content is an object, not a batch: the JSON batch format is one JSON array of events.",
+      "turtle": null
+    }
+  ],
+  "constants": {
+    "cloudevents_batch_json": "application/cloudevents-batch+json",
+    "cloudevents_json": "application/cloudevents+json",
+    "max_batch_bytes": "8388608",
+    "max_batch_events": "1000",
+    "max_event_bytes": "1048576",
+    "max_nesting": "64",
+    "namespace": "https://ikigai-rs.dev/ns/cloudevents#",
+    "node_prefix": "urn:iki:event:key:",
+    "turtle": "text/turtle"
+  },
+  "events": [
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\"}",
+      "intake": {
+        "advisory": null,
+        "authored_time": null,
+        "entry": null,
+        "feed": null,
+        "key": "event:b3:0d4106be73b453e98dde550641618b3c8d814adcc15716d0c4c9c6d4b422bb44"
+      },
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\"}",
+      "name": "minimal",
+      "node": "urn:iki:event:key:b3:0d4106be73b453e98dde550641618b3c8d814adcc15716d0c4c9c6d4b422bb44",
+      "refusal": null,
+      "turtle": "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix ce: <https://ikigai-rs.dev/ns/cloudevents#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n<urn:iki:event:key:b3:0d4106be73b453e98dde550641618b3c8d814adcc15716d0c4c9c6d4b422bb44> a ce:Event ;\n\tce:specversion \"1.0\" ;\n\tce:id \"A234-1234-1234\" ;\n\tce:source \"https://example.com/sensors/tn-1234567\"^^xsd:anyURI ;\n\tce:type \"com.example.reading\" .\n"
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"subject\":\"tn-1234567/reading/7\",\"time\":\"2026-11-23T20:00:00.197Z\",\"datacontenttype\":\"application/json\",\"dataschema\":\"https://example.com/schema/reading.json\",\"traceparent\":\"00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01\",\"comexampleregion\":\"eu-west\",\"retries\":3,\"replay\":false,\"data\":{\"celsius\":21.5,\"unit\":\"C\",\"tags\":[\"a\",\"b\"]}}",
+      "intake": {
+        "advisory": null,
+        "authored_time": "2026-11-23T20:00:00.197Z",
+        "entry": null,
+        "feed": null,
+        "key": "event:b3:0d4106be73b453e98dde550641618b3c8d814adcc15716d0c4c9c6d4b422bb44"
+      },
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"subject\":\"tn-1234567/reading/7\",\"time\":\"2026-11-23T20:00:00.197Z\",\"datacontenttype\":\"application/json\",\"dataschema\":\"https://example.com/schema/reading.json\",\"traceparent\":\"00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01\",\"comexampleregion\":\"eu-west\",\"replay\":false,\"retries\":3,\"data\":{\"celsius\":21.5,\"tags\":[\"a\",\"b\"],\"unit\":\"C\"}}",
+      "name": "full",
+      "node": "urn:iki:event:key:b3:0d4106be73b453e98dde550641618b3c8d814adcc15716d0c4c9c6d4b422bb44",
+      "refusal": null,
+      "turtle": "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix ce: <https://ikigai-rs.dev/ns/cloudevents#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n<urn:iki:event:key:b3:0d4106be73b453e98dde550641618b3c8d814adcc15716d0c4c9c6d4b422bb44> a ce:Event ;\n\tce:specversion \"1.0\" ;\n\tce:id \"A234-1234-1234\" ;\n\tce:source \"https://example.com/sensors/tn-1234567\"^^xsd:anyURI ;\n\tce:type \"com.example.reading\" ;\n\tce:subject \"tn-1234567/reading/7\" ;\n\tce:time \"2026-11-23T20:00:00.197Z\"^^xsd:dateTime ;\n\tce:datacontenttype \"application/json\" ;\n\tce:dataschema \"https://example.com/schema/reading.json\"^^xsd:anyURI ;\n\tce:traceparent \"00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01\" ;\n\tce:comexampleregion \"eu-west\" ;\n\tce:replay false ;\n\tce:retries \"3\"^^xsd:int ;\n\tce:data \"{\\\"celsius\\\":21.5,\\\"tags\\\":[\\\"a\\\",\\\"b\\\"],\\\"unit\\\":\\\"C\\\"}\"^^rdf:JSON .\n"
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"urn:layer:talk:entry:01m84z0jyt0000000000007\",\"source\":\"urn:layer:talk\",\"type\":\"say\",\"time\":\"2026-11-23T20:00:52.197Z\",\"datacontenttype\":\"text/turtle\",\"ikseq\":\"7\",\"ikepoch\":\"5f0c9e3a1b2d4c6e8f0a1b2c3d4e5f60\",\"data\":\"<urn:layer:talk:entry:01m84z0jyt0000000000007> <https://ikigai-rs.dev/ns#body> \\\"hello\\\" .\"}",
+      "intake": {
+        "advisory": "5f0c9e3a1b2d4c6e8f0a1b2c3d4e5f60:7",
+        "authored_time": "2026-11-23T20:00:52.197Z",
+        "entry": "urn:layer:talk:entry:01m84z0jyt0000000000007",
+        "feed": "urn:layer:talk",
+        "key": "event:b3:f8b0072e431ab22c4eef2621e4cb08104de988e9c9dedac339b8bbbf536c376d"
+      },
+      "json": "{\"specversion\":\"1.0\",\"id\":\"urn:layer:talk:entry:01m84z0jyt0000000000007\",\"source\":\"urn:layer:talk\",\"type\":\"say\",\"time\":\"2026-11-23T20:00:52.197Z\",\"datacontenttype\":\"text/turtle\",\"ikseq\":\"7\",\"ikepoch\":\"5f0c9e3a1b2d4c6e8f0a1b2c3d4e5f60\",\"data\":\"<urn:layer:talk:entry:01m84z0jyt0000000000007> <https://ikigai-rs.dev/ns#body> \\\"hello\\\" .\"}",
+      "name": "ikigai-layer-entry",
+      "node": "urn:iki:event:key:b3:f8b0072e431ab22c4eef2621e4cb08104de988e9c9dedac339b8bbbf536c376d",
+      "refusal": null,
+      "turtle": "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix ce: <https://ikigai-rs.dev/ns/cloudevents#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n<urn:iki:event:key:b3:f8b0072e431ab22c4eef2621e4cb08104de988e9c9dedac339b8bbbf536c376d> a ce:Event ;\n\tce:specversion \"1.0\" ;\n\tce:id \"urn:layer:talk:entry:01m84z0jyt0000000000007\" ;\n\tce:source \"urn:layer:talk\"^^xsd:anyURI ;\n\tce:type \"say\" ;\n\tce:time \"2026-11-23T20:00:52.197Z\"^^xsd:dateTime ;\n\tce:datacontenttype \"text/turtle\" ;\n\tce:ikseq \"7\" ;\n\tce:ikepoch \"5f0c9e3a1b2d4c6e8f0a1b2c3d4e5f60\" ;\n\tce:data \"<urn:layer:talk:entry:01m84z0jyt0000000000007> <https://ikigai-rs.dev/ns#body> \\\"hello\\\" .\" .\n"
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"urn:iki:ledger:default:transition:seq:9\",\"source\":\"urn:iki:ledger:default:transition\",\"type\":\"claimed\",\"subject\":\"urn:iki:ledger:default:item:4126\",\"ikseq\":\"9\"}",
+      "intake": {
+        "advisory": "9",
+        "authored_time": null,
+        "entry": "urn:iki:ledger:default:transition:seq:9",
+        "feed": "urn:iki:ledger:default:transition",
+        "key": "event:b3:4974cef5c586eeb065a1699f1010782ded3ad0a1f51303d3b98b6d2cedb499cc"
+      },
+      "json": "{\"specversion\":\"1.0\",\"id\":\"urn:iki:ledger:default:transition:seq:9\",\"source\":\"urn:iki:ledger:default:transition\",\"type\":\"claimed\",\"subject\":\"urn:iki:ledger:default:item:4126\",\"ikseq\":\"9\"}",
+      "name": "ikigai-transition",
+      "node": "urn:iki:event:key:b3:4974cef5c586eeb065a1699f1010782ded3ad0a1f51303d3b98b6d2cedb499cc",
+      "refusal": null,
+      "turtle": "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix ce: <https://ikigai-rs.dev/ns/cloudevents#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n<urn:iki:event:key:b3:4974cef5c586eeb065a1699f1010782ded3ad0a1f51303d3b98b6d2cedb499cc> a ce:Event ;\n\tce:specversion \"1.0\" ;\n\tce:id \"urn:iki:ledger:default:transition:seq:9\" ;\n\tce:source \"urn:iki:ledger:default:transition\"^^xsd:anyURI ;\n\tce:type \"claimed\" ;\n\tce:subject \"urn:iki:ledger:default:item:4126\" ;\n\tce:ikseq \"9\" .\n"
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"datacontenttype\":\"application/octet-stream\",\"data_base64\":\"aGVsbG8gd29ybGQ=\"}",
+      "intake": {
+        "advisory": null,
+        "authored_time": null,
+        "entry": null,
+        "feed": null,
+        "key": "event:b3:0d4106be73b453e98dde550641618b3c8d814adcc15716d0c4c9c6d4b422bb44"
+      },
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"datacontenttype\":\"application/octet-stream\",\"data_base64\":\"aGVsbG8gd29ybGQ=\"}",
+      "name": "binary-data",
+      "node": "urn:iki:event:key:b3:0d4106be73b453e98dde550641618b3c8d814adcc15716d0c4c9c6d4b422bb44",
+      "refusal": null,
+      "turtle": "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix ce: <https://ikigai-rs.dev/ns/cloudevents#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n<urn:iki:event:key:b3:0d4106be73b453e98dde550641618b3c8d814adcc15716d0c4c9c6d4b422bb44> a ce:Event ;\n\tce:specversion \"1.0\" ;\n\tce:id \"A234-1234-1234\" ;\n\tce:source \"https://example.com/sensors/tn-1234567\"^^xsd:anyURI ;\n\tce:type \"com.example.reading\" ;\n\tce:datacontenttype \"application/octet-stream\" ;\n\tce:data_base64 \"aGVsbG8gd29ybGQ=\"^^xsd:base64Binary .\n"
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"subject\":null,\"data\":null,\"comexampleflag\":null}",
+      "intake": {
+        "advisory": null,
+        "authored_time": null,
+        "entry": null,
+        "feed": null,
+        "key": "event:b3:0d4106be73b453e98dde550641618b3c8d814adcc15716d0c4c9c6d4b422bb44"
+      },
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\"}",
+      "name": "null-is-absent",
+      "node": "urn:iki:event:key:b3:0d4106be73b453e98dde550641618b3c8d814adcc15716d0c4c9c6d4b422bb44",
+      "refusal": null,
+      "turtle": "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix ce: <https://ikigai-rs.dev/ns/cloudevents#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n<urn:iki:event:key:b3:0d4106be73b453e98dde550641618b3c8d814adcc15716d0c4c9c6d4b422bb44> a ce:Event ;\n\tce:specversion \"1.0\" ;\n\tce:id \"A234-1234-1234\" ;\n\tce:source \"https://example.com/sensors/tn-1234567\"^^xsd:anyURI ;\n\tce:type \"com.example.reading\" .\n"
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"événement 🎉\",\"source\":\"/relative/source\",\"type\":\"k\"}",
+      "intake": {
+        "advisory": null,
+        "authored_time": null,
+        "entry": null,
+        "feed": null,
+        "key": "event:b3:0a85d7df8368bc1dfe26902fb45078f4a29df3ad94bd077d5fdd751670e6d381"
+      },
+      "json": "{\"specversion\":\"1.0\",\"id\":\"événement 🎉\",\"source\":\"/relative/source\",\"type\":\"k\"}",
+      "name": "relative-source-and-unicode-id",
+      "node": "urn:iki:event:key:b3:0a85d7df8368bc1dfe26902fb45078f4a29df3ad94bd077d5fdd751670e6d381",
+      "refusal": null,
+      "turtle": "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix ce: <https://ikigai-rs.dev/ns/cloudevents#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n<urn:iki:event:key:b3:0a85d7df8368bc1dfe26902fb45078f4a29df3ad94bd077d5fdd751670e6d381> a ce:Event ;\n\tce:specversion \"1.0\" ;\n\tce:id \"événement 🎉\" ;\n\tce:source \"/relative/source\"^^xsd:anyURI ;\n\tce:type \"k\" .\n"
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"traceparent\":\"cc-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01-what-comes-next\"}",
+      "intake": {
+        "advisory": null,
+        "authored_time": null,
+        "entry": null,
+        "feed": null,
+        "key": "event:b3:0d4106be73b453e98dde550641618b3c8d814adcc15716d0c4c9c6d4b422bb44"
+      },
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"traceparent\":\"cc-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01-what-comes-next\"}",
+      "name": "later-traceparent-version",
+      "node": "urn:iki:event:key:b3:0d4106be73b453e98dde550641618b3c8d814adcc15716d0c4c9c6d4b422bb44",
+      "refusal": null,
+      "turtle": "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix ce: <https://ikigai-rs.dev/ns/cloudevents#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n<urn:iki:event:key:b3:0d4106be73b453e98dde550641618b3c8d814adcc15716d0c4c9c6d4b422bb44> a ce:Event ;\n\tce:specversion \"1.0\" ;\n\tce:id \"A234-1234-1234\" ;\n\tce:source \"https://example.com/sensors/tn-1234567\"^^xsd:anyURI ;\n\tce:type \"com.example.reading\" ;\n\tce:traceparent \"cc-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01-what-comes-next\" .\n"
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"time\":\"2026-11-23t20:00:00z\"}",
+      "intake": {
+        "advisory": null,
+        "authored_time": "2026-11-23t20:00:00z",
+        "entry": null,
+        "feed": null,
+        "key": "event:b3:0d4106be73b453e98dde550641618b3c8d814adcc15716d0c4c9c6d4b422bb44"
+      },
+      "json": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"time\":\"2026-11-23t20:00:00z\"}",
+      "name": "lowercase-t-and-z",
+      "node": "urn:iki:event:key:b3:0d4106be73b453e98dde550641618b3c8d814adcc15716d0c4c9c6d4b422bb44",
+      "refusal": null,
+      "turtle": "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix ce: <https://ikigai-rs.dev/ns/cloudevents#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n<urn:iki:event:key:b3:0d4106be73b453e98dde550641618b3c8d814adcc15716d0c4c9c6d4b422bb44> a ce:Event ;\n\tce:specversion \"1.0\" ;\n\tce:id \"A234-1234-1234\" ;\n\tce:source \"https://example.com/sensors/tn-1234567\"^^xsd:anyURI ;\n\tce:type \"com.example.reading\" ;\n\tce:time \"2026-11-23t20:00:00z\"^^xsd:dateTime .\n"
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"d\",\"source\":\"urn:x\",\"type\":\"k\",\"data\":[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[1]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]}",
+      "intake": {
+        "advisory": null,
+        "authored_time": null,
+        "entry": null,
+        "feed": null,
+        "key": "event:b3:33f58a509ea09236189dae575a6e2d4d46ceecb5ee19df7b0a7f98d8bc88ec9a"
+      },
+      "json": "{\"specversion\":\"1.0\",\"id\":\"d\",\"source\":\"urn:x\",\"type\":\"k\",\"data\":[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[1]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]}",
+      "name": "data-at-the-nesting-bound",
+      "node": "urn:iki:event:key:b3:33f58a509ea09236189dae575a6e2d4d46ceecb5ee19df7b0a7f98d8bc88ec9a",
+      "refusal": null,
+      "turtle": "@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .\n@prefix ce: <https://ikigai-rs.dev/ns/cloudevents#> .\n@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .\n<urn:iki:event:key:b3:33f58a509ea09236189dae575a6e2d4d46ceecb5ee19df7b0a7f98d8bc88ec9a> a ce:Event ;\n\tce:specversion \"1.0\" ;\n\tce:id \"d\" ;\n\tce:source \"urn:x\"^^xsd:anyURI ;\n\tce:type \"k\" ;\n\tce:data \"[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[1]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]\"^^rdf:JSON .\n"
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"1\",\"source\":\"urn:x\"}",
+      "intake": null,
+      "json": null,
+      "name": "no-type",
+      "node": null,
+      "refusal": "An event has no `type`: every CloudEvent carries `specversion`, `id`, `source` and `type`.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"0.3\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\"}",
+      "intake": null,
+      "json": null,
+      "name": "wrong-specversion",
+      "node": null,
+      "refusal": "`0.3` is not a CloudEvents version these attributes follow: send `specversion` `1.0`.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\"}",
+      "intake": null,
+      "json": null,
+      "name": "empty-id",
+      "node": null,
+      "refusal": "An event's `id` is empty: name the event within its source.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":7,\"source\":\"urn:x\",\"type\":\"k\"}",
+      "intake": null,
+      "json": null,
+      "name": "id-not-a-string",
+      "node": null,
+      "refusal": "An event's `id` is a number, not a string: send it as a JSON string.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"urn:has space\",\"type\":\"com.example.reading\"}",
+      "intake": null,
+      "json": null,
+      "name": "source-with-space",
+      "node": null,
+      "refusal": "`urn:has space` is not a URI-reference: send `source` as an absolute or relative URI in ASCII, percent-encoding anything else.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://exämple.com/\",\"type\":\"com.example.reading\"}",
+      "intake": null,
+      "json": null,
+      "name": "source-not-ascii",
+      "node": null,
+      "refusal": "`https://exämple.com/` is not a URI-reference: send `source` as an absolute or relative URI in ASCII, percent-encoding anything else.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"time\":\"2026-11-23T20:00:00\"}",
+      "intake": null,
+      "json": null,
+      "name": "time-without-offset",
+      "node": null,
+      "refusal": "`2026-11-23T20:00:00` is not an RFC 3339 time: send `time` as a date-time with an offset, such as `2026-11-23T20:00:00Z`.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"time\":\"yesterday\"}",
+      "intake": null,
+      "json": null,
+      "name": "time-not-a-time",
+      "node": null,
+      "refusal": "`yesterday` is not an RFC 3339 time: send `time` as a date-time with an offset, such as `2026-11-23T20:00:00Z`.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"dataschema\":\"/schema.json\"}",
+      "intake": null,
+      "json": null,
+      "name": "dataschema-relative",
+      "node": null,
+      "refusal": "`/schema.json` is not an absolute URI: send `dataschema` as a URI with a scheme, in ASCII.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"traceparent\":\"00-4BF92F3577B34DA6A3CE929D0E0E4736-00F067AA0BA902B7-01\"}",
+      "intake": null,
+      "json": null,
+      "name": "traceparent-uppercase",
+      "node": null,
+      "refusal": "`00-4BF92F3577B34DA6A3CE929D0E0E4736-00F067AA0BA902B7-01` is not a W3C `traceparent`: send `{version}-{trace-id}-{parent-id}-{flags}` in lowercase hex, 2, 32, 16 and 2 digits.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"traceparent\":\"ff-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01\"}",
+      "intake": null,
+      "json": null,
+      "name": "traceparent-version-ff",
+      "node": null,
+      "refusal": "`ff-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01` is not a W3C `traceparent`: version `ff` is never valid.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"traceparent\":\"00-00000000000000000000000000000000-00f067aa0ba902b7-01\"}",
+      "intake": null,
+      "json": null,
+      "name": "traceparent-zero-trace",
+      "node": null,
+      "refusal": "`00-00000000000000000000000000000000-00f067aa0ba902b7-01` is not a W3C `traceparent`: its trace id is all zeros.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"traceparent\":\"00-4bf92f3577b34da6a3ce929d0e0e4736-0000000000000000-01\"}",
+      "intake": null,
+      "json": null,
+      "name": "traceparent-zero-parent",
+      "node": null,
+      "refusal": "`00-4bf92f3577b34da6a3ce929d0e0e4736-0000000000000000-01` is not a W3C `traceparent`: its parent id is all zeros.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"traceparent\":\"00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01-x\"}",
+      "intake": null,
+      "json": null,
+      "name": "traceparent-version-00-too-long",
+      "node": null,
+      "refusal": "`00-4bf92f3577b34da6a3ce929d0e0e4736-00f067aa0ba902b7-01-x` is not a W3C `traceparent`: a version `00` value is exactly 55 characters.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"ikseq\":7}",
+      "intake": null,
+      "json": null,
+      "name": "ikseq-a-number",
+      "node": null,
+      "refusal": "An event's `ikseq` is a number: send it as a string of decimal digits, because a CloudEvents Integer is 32-bit and a feed position is 64-bit.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"ikseq\":\"0\"}",
+      "intake": null,
+      "json": null,
+      "name": "ikseq-zero",
+      "node": null,
+      "refusal": "`0` is not a sequence number: a feed's positions start at 1.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"ikepoch\":\"e-1\"}",
+      "intake": null,
+      "json": null,
+      "name": "ikepoch-without-ikseq",
+      "node": null,
+      "refusal": "An event names an `ikepoch` with no `ikseq`: send both, or neither.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"Region\":\"eu\"}",
+      "intake": null,
+      "json": null,
+      "name": "extension-name-uppercase",
+      "node": null,
+      "refusal": "`Region` is not a CloudEvents attribute name: use lowercase ASCII letters and digits only.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"region_name\":\"eu\"}",
+      "intake": null,
+      "json": null,
+      "name": "extension-name-underscore",
+      "node": null,
+      "refusal": "`region_name` is not a CloudEvents attribute name: use lowercase ASCII letters and digits only.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"ratio\":0.5}",
+      "intake": null,
+      "json": null,
+      "name": "extension-a-fraction",
+      "node": null,
+      "refusal": "An event's `ratio` is 0.5, which is not a CloudEvents Integer: send a whole number from -2147483648 to 2147483647, or a string.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"big\":2147483648}",
+      "intake": null,
+      "json": null,
+      "name": "extension-past-32-bits",
+      "node": null,
+      "refusal": "An event's `big` is 2147483648, which is not a CloudEvents Integer: send a whole number from -2147483648 to 2147483647, or a string.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"meta\":{\"a\":1}}",
+      "intake": null,
+      "json": null,
+      "name": "extension-an-object",
+      "node": null,
+      "refusal": "An event's extension `meta` is an object: send a string, a boolean or an integer.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"data\":\"x\",\"data_base64\":\"eA==\"}",
+      "intake": null,
+      "json": null,
+      "name": "both-data-and-data-base64",
+      "node": null,
+      "refusal": "An event carries both `data` and `data_base64`: send one of them.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"data_base64\":\"aGVsbG8\"}",
+      "intake": null,
+      "json": null,
+      "name": "data-base64-unpadded",
+      "node": null,
+      "refusal": "`aGVsbG8` is not base64: send `data_base64` in RFC 4648's standard alphabet, padded with `=`.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"A234-1234-1234\",\"source\":\"https://example.com/sensors/tn-1234567\",\"type\":\"com.example.reading\",\"subject\":\"\"}",
+      "intake": null,
+      "json": null,
+      "name": "empty-subject",
+      "node": null,
+      "refusal": "An event's `subject` is empty: leave it out, or give it a value.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":\"1.0\",\"id\":\"d\",\"source\":\"urn:x\",\"type\":\"k\",\"data\":[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[1]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]}",
+      "intake": null,
+      "json": null,
+      "name": "data-past-the-nesting-bound",
+      "node": null,
+      "refusal": "The content nests JSON objects and arrays deeper than 64: flatten the event's data, or send it as `data_base64`.",
+      "turtle": null
+    },
+    {
+      "input": "[]",
+      "intake": null,
+      "json": null,
+      "name": "an-array",
+      "node": null,
+      "refusal": "The content is an array, not a CloudEvent: the JSON event format is one JSON object.",
+      "turtle": null
+    },
+    {
+      "input": "{\"specversion\":",
+      "intake": null,
+      "json": null,
+      "name": "not-json",
+      "node": null,
+      "refusal": "The content is not JSON: EOF while parsing a value at line 1 column 15.",
+      "turtle": null
+    }
+  ],
+  "turtle": [
+    {
+      "input": "",
+      "json": "[]",
+      "name": "empty",
+      "refusal": null
+    },
+    {
+      "input": "<urn:x> <https://ikigai-rs.dev/ns/cloudevents#id> \"1\" .",
+      "json": null,
+      "name": "a-foreign-node",
+      "refusal": "`urn:x` is not an event's node: the form names each event `urn:iki:event:key:b3:{hex}`, from its `source` and `id`."
+    },
+    {
+      "input": "[] <https://ikigai-rs.dev/ns/cloudevents#id> \"1\" .",
+      "json": null,
+      "name": "a-blank-node",
+      "refusal": "The content has a blank node: the form names every event, so send it without one."
+    },
+    {
+      "input": "<urn:iki:event:key:b3:00> <http://purl.org/dc/terms/created> \"2026-11-23T20:00:00Z\" .",
+      "json": null,
+      "name": "a-property-outside-the-form",
+      "refusal": "`http://purl.org/dc/terms/created` is not a property of the form: every property is `ce:` and an attribute's name."
+    },
+    {
+      "input": "<urn:iki:event:key:b3:00> <",
+      "json": null,
+      "name": "not-turtle",
+      "refusal": "The content is not Turtle: Parser error at line 1 column 27: Unexpected end of file."
+    }
+  ]
+}

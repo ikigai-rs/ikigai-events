@@ -14,14 +14,14 @@ Adapted from the [ACCESSIBILITY.md template](https://github.com/mgifford/ACCESSI
 | Field | Value |
 |---|---|
 | Project | ikigai-events: Rust libraries of identifiers and bridges for ikigai's event-facing modules |
-| Published at | not published: the identifiers crate is built, `publish = false` until reviewed |
+| Published at | not published: the identifiers crate and the CloudEvents bridge are built, `publish = false` until reviewed |
 | Owner | the maintainers of this repository |
 | Report a barrier | [a GitHub issue](https://github.com/ikigai-rs/ikigai-events/issues/new) |
 | Private channel | [private vulnerability reporting](https://github.com/ikigai-rs/ikigai-events/security/advisories/new), for anything security-sensitive |
 | Target | WCAG 2.2 Level AA, for any page or terminal that presents this output |
 | Status | Evaluation in progress. No conformance claim. |
-| Last reviewed | 2026-11-23 |
-| Next review | when a bridge crate first emits a face, terminal text or a delivered event |
+| Last reviewed | 2026-11-24 |
+| Next review | when a bridge crate first emits a text face, terminal text or a delivered event |
 
 ## Commitment
 
@@ -46,7 +46,18 @@ has not been tested.
   (the `refusal` fields), which `tests/vectors.rs` recomputes on every test run, and the escaping
   and cutting are pinned in `src/name.rs`'s unit tests.
 
-As each bridge crate adds output people read (a text face, the text of a delivered or refused
+- **The CloudEvents bridge's refusal sentences** (`crates/ikigai-events-cloudevents`): one
+  sentence for each event, batch or Turtle form it refuses, in the identifiers crate's form
+  (the same `Refusal` type, the same quoting with `shown`), reaching a person as the
+  `InvalidArgument` detail of `urn:iki:cloudevent:lift` or `urn:iki:cloudevent:lower` on
+  `content`. A sentence that passes on a parser's own message (`serde_json`'s or `oxttl`'s)
+  escapes it with `str::escape_debug` or quotes it with `shown`. Every sentence is pinned byte
+  for byte in `crates/ikigai-events-cloudevents/tests/vectors/cloudevents_vectors.json`, which
+  `tests/vectors.rs` recomputes on every test run. The `as` refusal and the over-budget refusal
+  are short clauses in the kernel's `InvalidArgument` and `OverBudget` forms, untested by
+  vector.
+
+As each further bridge crate adds output people read (a text face, the text of a delivered or refused
 event), it is listed here with its form and its test.
 
 ### Not currently in scope
@@ -71,6 +82,8 @@ have not been evaluated with assistive technology.
 |---|---|---|
 | Refusal sentences pinned by tests | Pass | every refusal in `tests/vectors/identifier_vectors.json`, recomputed by `tests/vectors.rs`; escaping and cutting in `src/name.rs` (`a_refusal_escapes_and_cuts_what_it_quotes`) |
 | No control characters from untrusted input | Pass | the same unit test sends an escape sequence and reads back `\u{1b}`; the vectors carry a layer name with ESC and one with a trailing newline |
+| CloudEvents refusal sentences pinned by tests | Pass | every refusal in `crates/ikigai-events-cloudevents/tests/vectors/cloudevents_vectors.json`, recomputed by that crate's `tests/vectors.rs` |
+| No control characters from untrusted input, CloudEvents | Pass | inputs are quoted with `shown`; parser messages pass through `escape_debug` or `shown`; the vectors carry a non-ASCII source and a unicode id |
 | Refusal sentences read by a screen reader | Blocked | no screen-reader session has been run |
 | Text faces read by a screen reader | Blocked | no face exists yet |
 
@@ -106,6 +119,7 @@ output people read.
 
 - 2026-11-23: first version, for the scaffold.
 - 2026-11-23: the identifiers crate's refusal sentences enter scope (ledger #4126).
+- 2026-11-24: the CloudEvents bridge's refusal sentences enter scope (ledger #4117).
 
 ## References
 

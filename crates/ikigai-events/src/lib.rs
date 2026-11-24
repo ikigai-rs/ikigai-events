@@ -41,6 +41,7 @@ mod name;
 pub use feed::{Cursor, Entry, Feed, Listener};
 pub use key::{event_key, FenceKey, EVENT_KEY_DOMAIN, EVENT_KEY_PREFIX, FENCE_KEY_PREFIX};
 pub use name::{
-    EntryId, FeedEpoch, ItemRef, LayerName, LedgerName, ListenerId, Refusal, Step, MAX_ENTRY_ID,
-    MAX_EPOCH, MAX_ITEM, MAX_LAYER_NAME, MAX_LEDGER_NAME, MAX_LISTENER_ID, MAX_STEP, SHOWN,
+    shown, EntryId, FeedEpoch, ItemRef, LayerName, LedgerName, ListenerId, Refusal, Step,
+    MAX_ENTRY_ID, MAX_EPOCH, MAX_ITEM, MAX_LAYER_NAME, MAX_LEDGER_NAME, MAX_LISTENER_ID, MAX_STEP,
+    SHOWN,
 };

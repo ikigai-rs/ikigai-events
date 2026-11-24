@@ -1,0 +1,69 @@
+# The CloudEvents form's vocabulary (ikigai-events-cloudevents, ledger #4117).
+#
+# A CloudEvent lifted to RDF is one node of class ce:Event, and every attribute `{name}` of the
+# event, extensions included, is the property ce:{name}. CloudEvents attribute names are
+# lowercase ASCII letters and digits only (CloudEvents 1.0, section 3.1.1), so every one is a
+# local name here, and an extension needs no new declaration to be carried: this file declares
+# the specification's attributes, ikigai's three extensions and the two data properties, and
+# any other ce:{name} is an extension the event carried.
+#
+# Namespace note: self-contained under `https://ikigai-rs.dev/ns/cloudevents#`, the `sig:` and
+# `log:` precedent, and SEPARATE from the core vocabulary at https://ikigai-rs.dev/ns. Nothing
+# here is a term the receiving log stamps: ce:time is the AUTHORED time, never dcterms:created,
+# and ce:ikseq is an ADVISORY position, never ik:seq.
+#
+# Not yet served at that IRI: deploying it is a separate, manual step.
+
+@prefix ce:   <https://ikigai-rs.dev/ns/cloudevents#> .
+@prefix owl:  <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd:  <http://www.w3.org/2001/XMLSchema#> .
+
+<https://ikigai-rs.dev/ns/cloudevents> a owl:Ontology ;
+    rdfs:label "CloudEvents form" ;
+    rdfs:comment "A CloudEvent as RDF: one ce:Event node per event, named urn:iki:event:key:b3:{hex} from the event's source and id, and one ce:{name} property per attribute. Written and read by the ikigai-events-cloudevents transreptor pair." ;
+    owl:versionInfo "0.1.0" .
+
+ce:Event a rdfs:Class ;
+    rdfs:label "Event" ;
+    rdfs:comment "One CloudEvent. Its node is named from its event key, never from its id, so an event that spells another resource's IRI as its id states nothing about that resource." .
+
+ce:specversion a rdf:Property ; rdfs:domain ce:Event ; rdfs:range xsd:string ;
+    rdfs:label "specversion" ; rdfs:comment "The CloudEvents version the event follows: 1.0." .
+
+ce:id a rdf:Property ; rdfs:domain ce:Event ; rdfs:range xsd:string ;
+    rdfs:label "id" ; rdfs:comment "The event's id, unique within its source. For an ikigai entry, the entry's IRI." .
+
+ce:source a rdf:Property ; rdfs:domain ce:Event ; rdfs:range xsd:anyURI ;
+    rdfs:label "source" ; rdfs:comment "Where the event happened, as a URI-reference: for an ikigai entry, its feed's source. A claim of the sender's, never an identity." .
+
+ce:type a rdf:Property ; rdfs:domain ce:Event ; rdfs:range xsd:string ;
+    rdfs:label "type" ; rdfs:comment "The kind of event: for an ikigai entry, its rdf:type IRI or its feed event's kind." .
+
+ce:subject a rdf:Property ; rdfs:domain ce:Event ; rdfs:range xsd:string ;
+    rdfs:label "subject" ; rdfs:comment "What the event is about, within its source." .
+
+ce:time a rdf:Property ; rdfs:domain ce:Event ; rdfs:range xsd:dateTime ;
+    rdfs:label "time" ; rdfs:comment "When the event's author says it happened, as the RFC 3339 text it was sent in: AUTHORED time, never a receiving log's order." .
+
+ce:datacontenttype a rdf:Property ; rdfs:domain ce:Event ; rdfs:range xsd:string ;
+    rdfs:label "datacontenttype" ; rdfs:comment "The media type of the event's data." .
+
+ce:dataschema a rdf:Property ; rdfs:domain ce:Event ; rdfs:range xsd:anyURI ;
+    rdfs:label "dataschema" ; rdfs:comment "The schema the event's data follows, as an absolute URI." .
+
+ce:ikseq a rdf:Property ; rdfs:domain ce:Event ; rdfs:range xsd:string ;
+    rdfs:label "ikseq" ; rdfs:comment "The position the sender gave the event in its feed, as decimal digits. Advisory: only the receiving log assigns positions." .
+
+ce:ikepoch a rdf:Property ; rdfs:domain ce:Event ; rdfs:range xsd:string ;
+    rdfs:label "ikepoch" ; rdfs:comment "The epoch of the sender's feed, when it names one." .
+
+ce:traceparent a rdf:Property ; rdfs:domain ce:Event ; rdfs:range xsd:string ;
+    rdfs:label "traceparent" ; rdfs:comment "The W3C trace context of the run the event came from." .
+
+ce:data a rdf:Property ; rdfs:domain ce:Event ;
+    rdfs:label "data" ; rdfs:comment "The event's data: an xsd:string when the JSON format carried a string, an rdf:JSON literal when it carried any other JSON value." .
+
+ce:data_base64 a rdf:Property ; rdfs:domain ce:Event ; rdfs:range xsd:base64Binary ;
+    rdfs:label "data_base64" ; rdfs:comment "The event's binary data, as the RFC 4648 base64 it was sent in." .

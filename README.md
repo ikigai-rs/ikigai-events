@@ -22,8 +22,8 @@ Its rules hold here: a golden-thread cut is a hint to re-read, never an event; o
 belong to the log that owns the entries; effects are made safe by idempotency keys and fencing,
 never by an exactly-once promise; and authority never travels with an event.
 
-Status: the identifiers crate is built and unpublished (`publish = false` until it is reviewed).
-No bridge exists yet.
+Status: built and unpublished (`publish = false` until reviewed): the identifiers crate, and
+the first bridge, [`ikigai-events-cloudevents`](crates/ikigai-events-cloudevents/README.md).
 
 ## The resource map
 
@@ -44,6 +44,8 @@ kernel, a relay) and every consumer agree. Each row is a type in `crates/ikigai-
 | an event's idempotency key | `event:b3:{hex}`, from (source, id) | value | whoever takes the event in | `event_key` |
 | a fencing key | `fence:{ledger}:{item}:{epoch}:{step}` | value | whoever performs the effect | `FenceKey` |
 | the CloudEvents mapping | attribute ↔ ikigai term | data and two functions | this crate | `cloudevents::{MAPPING, lower, lift}` |
+| the CloudEvents lift and lower | `urn:iki:cloudevent:lift`, `urn:iki:cloudevent:lower` | transreptor pair | `ikigai-events-cloudevents` | `space()` |
+| an event, as RDF | `urn:iki:event:key:b3:{hex}`, named by its event key | node in a representation | `ikigai-events-cloudevents` | `event_node` |
 
 Three decisions the map carries:
 
@@ -57,7 +59,9 @@ Three decisions the map carries:
   either as `idempotency-key=` unchanged, and the event key's digest is core's `b3:` content id.
 
 The shared vectors, which the Python, TypeScript and .NET faces copy verbatim, are
-[`crates/ikigai-events/tests/vectors/`](crates/ikigai-events/tests/vectors/README.md).
+[`crates/ikigai-events/tests/vectors/`](crates/ikigai-events/tests/vectors/README.md) and, for
+the CloudEvents formats,
+[`crates/ikigai-events-cloudevents/tests/vectors/`](crates/ikigai-events-cloudevents/tests/vectors/README.md).
 
 ## License
 
