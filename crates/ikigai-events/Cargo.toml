@@ -3,6 +3,7 @@ name = "ikigai-events"
 description = "The identifiers ikigai's event-facing modules share: entries, feeds, cursors, feed epochs, transitions, idempotency and fencing keys, and the CloudEvents attribute mapping."
 version.workspace = true
 edition.workspace = true
+rust-version.workspace = true
 license.workspace = true
 authors.workspace = true
 repository.workspace = true
