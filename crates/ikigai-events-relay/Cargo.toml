@@ -1,0 +1,36 @@
+[package]
+name = "ikigai-events-relay"
+description = "Delivery out of ikigai: subscriptions to a feed, a cursor written after the destination acknowledges, delivery records, dead letters, Standard Webhooks signatures and a server-sent events face."
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+license.workspace = true
+authors.workspace = true
+repository.workspace = true
+readme = "README.md"
+keywords = ["ikigai", "events", "webhooks", "cloudevents", "sse"]
+categories = ["wasm"]
+# Unpublished until reviewed, like the crates it builds on (ledger #4118).
+publish = false
+
+[dependencies]
+# The shared identifiers: feeds, entries, cursors, event keys and the one refusal type. Same
+# workspace, so a path (not an override).
+ikigai-events = { path = "../ikigai-events" }
+# The JSON event format a destination receives (`to_json`) and the event's own checks
+# (`Event::check`), so the relay keeps no copy of either.
+ikigai-events-cloudevents = { path = "../ikigai-events-cloudevents" }
+# The kernel's types: `Kernel`, `Request`, `Capability` (the narrowed grant), `Error` and its
+# `FailureClass`, which decides retry or dead letter. Every delivery is a request through the
+# kernel: the relay links no HTTP client and no broker client.
+ikigai-core = "0.4.2"
+async-trait = "0.1"
+# Standard Webhooks signatures from the specification's own reference implementation
+# (github.com/standard-webhooks/standard-webhooks), never a private HMAC. It links `http` for
+# its header types only, no client.
+standardwebhooks = "1.3"
+
+[dev-dependencies]
+futures = "0.3"
+# The reference verifier's header map, to check a delivery's headers as a receiver would.
+http = "1"
