@@ -14,13 +14,13 @@ Adapted from the [ACCESSIBILITY.md template](https://github.com/mgifford/ACCESSI
 | Field | Value |
 |---|---|
 | Project | ikigai-events: Rust libraries of identifiers and bridges for ikigai's event-facing modules |
-| Published at | not published: the identifiers crate and the CloudEvents bridge are built, `publish = false` until reviewed |
+| Published at | not published: the identifiers crate, the CloudEvents bridge and the relay are built, `publish = false` until reviewed |
 | Owner | the maintainers of this repository |
 | Report a barrier | [a GitHub issue](https://github.com/ikigai-rs/ikigai-events/issues/new) |
 | Private channel | [private vulnerability reporting](https://github.com/ikigai-rs/ikigai-events/security/advisories/new), for anything security-sensitive |
 | Target | WCAG 2.2 Level AA, for any page or terminal that presents this output |
 | Status | Evaluation in progress. No conformance claim. |
-| Last reviewed | 2026-11-24 |
+| Last reviewed | 2026-11-25 |
 | Next review | when a bridge crate first emits a text face, terminal text or a delivered event |
 
 ## Commitment
@@ -57,6 +57,16 @@ has not been tested.
   are short clauses in the kernel's `InvalidArgument` and `OverBudget` forms, untested by
   vector.
 
+- **The relay's refusal sentences and its server-sent events face** (`crates/ikigai-events-relay`):
+  one sentence for each subscription id, destination, signing secret or out-of-order entry it
+  refuses, in the identifiers crate's form (the same `Refusal` type, input quoted with `shown`;
+  a signing secret is never quoted). A delivery record's failure message is escaped with
+  `str::escape_debug` before it is kept. The SSE face (`sse_frame`) writes an entry as an `id:`
+  line and one `data:` line of compact JSON, so a payload's line breaks stay escaped inside it
+  and never begin a field; it has no `event:` field, so a sender's `type` never names a stream
+  event. Every refusal sentence is pinned byte for byte in `tests/delivery.rs`,
+  `tests/signature.rs` and the doc tests of `src/sse.rs` and `src/subscription.rs`.
+
 As each further bridge crate adds output people read (a text face, the text of a delivered or refused
 event), it is listed here with its form and its test.
 
@@ -85,7 +95,9 @@ have not been evaluated with assistive technology.
 | CloudEvents refusal sentences pinned by tests | Pass | every refusal in `crates/ikigai-events-cloudevents/tests/vectors/cloudevents_vectors.json`, recomputed by that crate's `tests/vectors.rs` |
 | No control characters from untrusted input, CloudEvents | Pass | inputs are quoted with `shown`; parser messages pass through `escape_debug` or `shown`; the vectors carry a non-ASCII source and a unicode id |
 | Refusal sentences read by a screen reader | Blocked | no screen-reader session has been run |
-| Text faces read by a screen reader | Blocked | no face exists yet |
+| Relay refusal sentences pinned by tests | Pass | `crates/ikigai-events-relay/tests/delivery.rs` and `tests/signature.rs` compare every sentence exactly |
+| No control characters from untrusted input, relay | Pass | inputs quoted with `shown`; failure messages escaped with `escape_debug`; the SSE doc test sends a payload holding a newline and reads it back escaped |
+| Text faces read by a screen reader | Blocked | the relay's SSE face is machine-read JSON; no screen-reader session has been run on a page that shows it |
 
 ## Known limitations
 
@@ -120,6 +132,7 @@ output people read.
 - 2026-11-23: first version, for the scaffold.
 - 2026-11-23: the identifiers crate's refusal sentences enter scope (ledger #4126).
 - 2026-11-24: the CloudEvents bridge's refusal sentences enter scope (ledger #4117).
+- 2026-11-25: the relay's refusal sentences and its SSE face enter scope (ledger #4118).
 
 ## References
 

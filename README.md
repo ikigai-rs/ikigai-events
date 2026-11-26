@@ -23,7 +23,8 @@ belong to the log that owns the entries; effects are made safe by idempotency ke
 never by an exactly-once promise; and authority never travels with an event.
 
 Status: built and unpublished (`publish = false` until reviewed): the identifiers crate, and
-the first bridge, [`ikigai-events-cloudevents`](crates/ikigai-events-cloudevents/README.md).
+the first bridge, [`ikigai-events-cloudevents`](crates/ikigai-events-cloudevents/README.md), and
+delivery out of ikigai, [`ikigai-events-relay`](crates/ikigai-events-relay/README.md).
 
 ## The resource map
 
@@ -46,6 +47,7 @@ kernel, a relay) and every consumer agree. Each row is a type in `crates/ikigai-
 | the CloudEvents mapping | attribute ↔ ikigai term | data and two functions | this crate | `cloudevents::{MAPPING, lower, lift}` |
 | the CloudEvents lift and lower | `urn:iki:cloudevent:lift`, `urn:iki:cloudevent:lower` | transreptor pair | `ikigai-events-cloudevents` | `space()` |
 | an event, as RDF | `urn:iki:event:key:b3:{hex}`, named by its event key | node in a representation | `ikigai-events-cloudevents` | `event_node` |
+| a relay subscription, its cursor, a delivery | `urn:relay:subscription:id:{id}`, `urn:relay:cursor:subscription:{id}`, `urn:relay:delivery:subscription:{id}:seq:{n}` | **ATOM** | `ikigai-events-relay` | `Subscription`, `Store`, `Delivery` |
 
 Three decisions the map carries:
 
